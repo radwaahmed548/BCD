@@ -28,7 +28,8 @@ class RegisterScreen extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: KMainColor,
-                    fontSize: 36
+                    fontSize: 36,
+                  fontFamily: "Raleway"
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -98,7 +99,8 @@ class RegisterScreen extends StatelessWidget {
                     "SIGN UP",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
+                      fontFamily: "Robotomono"
                     ),
                   ),
                 ),

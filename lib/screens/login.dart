@@ -30,9 +30,12 @@ class LoginScreen extends StatelessWidget {
               Text(
                 "LOGIN",
                 style: TextStyle(
+
+
                     fontWeight: FontWeight.bold,
                     color: KMainColor,
-                    fontSize: 36
+                    fontSize: 36,
+                  fontFamily: "Raleway",
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -99,7 +102,8 @@ class LoginScreen extends StatelessWidget {
                     "LOGIN",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
+                      fontFamily: 'Robotomono',
                     ),
                   ),
                 ),
