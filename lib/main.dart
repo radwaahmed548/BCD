@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
+import 'screens/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'Flutter Login',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/' : (context) => WelcomeScreen(),
         '/login' : (context) => LoginScreen(),
         '/register' : (context) => RegisterScreen(),
+        '/home' : (context) => homescreen(),
       },
     );
   }

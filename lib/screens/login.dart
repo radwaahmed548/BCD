@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'register.dart';
 import 'package:gp/components/background.dart';
-
+import 'home.dart';
+import 'package:gp/components/maindrawer.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+
       resizeToAvoidBottomPadding: false,
 
 
@@ -85,7 +87,9 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'login.dart';
 import 'package:gp/components/background.dart';
+import 'home.dart';
 
 
 class RegisterScreen extends StatelessWidget {
@@ -82,7 +83,9 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0),
