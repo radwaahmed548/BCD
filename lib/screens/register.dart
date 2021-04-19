@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'login.dart';
 import 'package:gp/components/background.dart';
-import 'home.dart';
+import '../home/home.dart';
 
 
 class RegisterScreen extends StatelessWidget {

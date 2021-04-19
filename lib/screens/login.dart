@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'register.dart';
 import 'package:gp/components/background.dart';
-import 'home.dart';
+import '../home/home.dart';
 import 'package:gp/components/maindrawer.dart';
 class LoginScreen extends StatelessWidget {
   @override
