@@ -4,7 +4,6 @@ import '../screens/register.dart';
 import 'package:gp/components/background.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/components/tools.dart';
-import 'package:gp/home/constants.dart';
 import 'package:gp/home/data.dart';
 import 'package:gp/components/tools.dart';
 
@@ -21,15 +20,17 @@ class _homescreenState extends State<homescreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldkey,
       drawer: MainDrawer(),
-      backgroundColor: gradientEndColor,
+
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [KSecondColor, Kgradintstartcolor],
                 begin: Alignment.topCenter,
+                
                 end: Alignment.bottomCenter,
                 stops: [0.2, 0.7])),
         child: SafeArea(
@@ -70,17 +71,17 @@ class _homescreenState extends State<homescreen> {
                     ),
                   ),
                   Container(
-                    height: 600,
+                      height: size.height * 0.75,
                     padding: const EdgeInsets.only(left: 10),
 
                     child: Swiper(
                       itemCount: 2,
-                      itemWidth: MediaQuery.of(context).size.width - 2 * 50,
+                      itemWidth: MediaQuery.of(context).size.width - 2 * 40,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(
 
                         builder:
-                        DotSwiperPaginationBuilder(activeSize: 30, activeColor: KMainColor,space: 0,color:KMainColor),
+                        DotSwiperPaginationBuilder(activeSize: 30, activeColor: KSecondColor,space: 0,color:KSecondColor),
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
@@ -106,7 +107,7 @@ class _homescreenState extends State<homescreen> {
 
                                           SizedBox(height: 50),
                                           Text(
-                                            planets[index].name,
+                                            menue[index].name,
                                             style: TextStyle(
                                               fontFamily: 'Avenir',
                                               fontSize: 30,
@@ -116,7 +117,7 @@ class _homescreenState extends State<homescreen> {
                                             textAlign: TextAlign.left,
                                           ),
                                           Text(
-                                            planets[index].description,
+                                            menue[index].description,
                                             style: TextStyle(
                                               fontFamily: 'Avenir',
                                               fontSize: 20,
@@ -125,7 +126,7 @@ class _homescreenState extends State<homescreen> {
                                             ),
                                             textAlign: TextAlign.left,
                                           ),
-                                          SizedBox(height: 32),
+                                          SizedBox(height: 30),
                                           Row(
                                             children: <Widget>[
                                               Text(
@@ -151,11 +152,11 @@ class _homescreenState extends State<homescreen> {
                                 ],
                               ),
                               Positioned(
-left: 40
+left: 70
                                 ,child: CircleAvatar(
                                   radius: 85,
                                   backgroundColor: Kgradintstartcolor
-                                  ,child: Image( image: AssetImage(planets[index].image),width: 100,)),
+                                  ,child: Image( image: AssetImage(menue[index].image),width: 100,)),
                               ),
 
 

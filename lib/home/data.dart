@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PlanetInfo {
+class MenueInfo {
   final int position;
   final String name;
   final String image;
@@ -9,7 +9,7 @@ class PlanetInfo {
 
 
 
-  PlanetInfo(
+  MenueInfo(
       this.position, {
         this.name,
         this.image,
@@ -18,15 +18,15 @@ class PlanetInfo {
       });
 }
 
-List<PlanetInfo> planets = [
-  PlanetInfo(1,
+List<MenueInfo> menue = [
+  MenueInfo(1,
       name: 'Examination',
 
       description:
   'Breast self-exam (BSE), or regularly examining your breasts on your own, can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
     image: 'images/test.png',
     ),
-  PlanetInfo(2,
+  MenueInfo(2,
       name: 'Prediction',
 
       description:
