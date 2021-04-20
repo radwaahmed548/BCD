@@ -37,7 +37,7 @@ class _homescreenState extends State<homescreen> {
           child: Stack(
             children: [
               Positioned
-                (top: 40,
+                (top: 30,
                 child: IconButton(icon: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Icon(Icons.menu,color:Colors.white,),
