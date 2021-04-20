@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gp/screens/calendar_screen.dart';
+import './screens/examination_video_screen.dart';
 import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/login' : (context) => LoginScreen(),
         '/register' : (context) => RegisterScreen(),
         '/home' : (context) => homescreen(),
+        '/examination' : (context) => ExaminationScreen(),
+        '/calendar' : (context) => CalendarScreen(),
       },
     );
   }

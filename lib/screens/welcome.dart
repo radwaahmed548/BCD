@@ -29,17 +29,23 @@ class WelcomeScreen extends StatelessWidget {
         ],),
           Positioned(top: 350,
             left: 9,
-            child: Text('Hello Fighter..',
-              style: TextStyle(color: Colors.white,fontSize: 35,fontWeight: FontWeight.bold,),),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text('Hello Fighter..',
+                style: TextStyle(color: Colors.white,fontSize: 35,fontWeight: FontWeight.bold,),),
+            ),
 
 
           ),
           Positioned(top: 400,
             left: 9,
-            child: Text('we will be with you through your trip   ',
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text('we will be with you through your trip   ',
 
 
-              style: TextStyle(color: Colors.white,fontSize: 15,),),
+                style: TextStyle(color: Colors.white,fontSize: 15,),),
+            ),
 
 
           ),

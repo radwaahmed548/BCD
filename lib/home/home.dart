@@ -32,7 +32,8 @@ class _homescreenState extends State<homescreen> {
                 begin: Alignment.topCenter,
                 
                 end: Alignment.bottomCenter,
-                stops: [0.2, 0.7])),
+                stops: [0.2, 0.7]),
+        ),
         child: SafeArea(
           child: Stack(
             children: [
@@ -85,7 +86,9 @@ class _homescreenState extends State<homescreen> {
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/examination');
+                          },
                           child: Stack(
                             children: <Widget>[
 
@@ -152,7 +155,7 @@ class _homescreenState extends State<homescreen> {
                                 ],
                               ),
                               Positioned(
-left: 70
+                                left: 70
                                 ,child: CircleAvatar(
                                   radius: 85,
                                   backgroundColor: Kgradintstartcolor

@@ -69,7 +69,7 @@ class MainDrawer extends StatelessWidget {
                 title: Row(
                   children: [
 
-                    Icon(Icons.logout),
+                    Icon(Icons.arrow_back),
                     Container(width: 6,),
                     Text('Logout'),
                   ],
