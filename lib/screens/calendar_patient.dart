@@ -5,7 +5,7 @@ import 'package:gp/components/tools.dart';
 import 'package:gp/screens/start_your_trip.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarScreen extends StatelessWidget {
+class CalendarPatient extends StatelessWidget {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey<ScaffoldState>();
   CalendarController _controller = CalendarController();
 
@@ -34,7 +34,7 @@ class CalendarScreen extends StatelessWidget {
                 FlatButton(
                   onPressed: () {},
                   child: Text(
-                    'Update',
+                    'Check',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

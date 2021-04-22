@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/components/tools.dart';
 import '../components/background.dart';
 import '../components/maindrawer.dart';
 import 'package:video_player/video_player.dart';
@@ -37,94 +38,113 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
       key: _drawerKey,
       drawer: MainDrawer(),
       body: Container(
-        child: Background(
-          child: SafeArea(
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 30,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back,),
-                    onPressed: () => Navigator.of(context).pop(),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Positioned(
+                child: ClipPath(
+                  clipper: ClippingClass(),
+                  child: Container(height: 550, decoration: BoxDecoration(color: KSecondColor,),),
+                ),
+              ),
+              Positioned(
+                top: 30,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back,),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Positioned(
+                top: 30,
+                left: 50,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.menu,
                   ),
+                  onPressed: () => _drawerKey.currentState.openDrawer(),
                 ),
-                Positioned(
-                  top: 30,
-                  left: 50,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                    ),
-                    onPressed: () => _drawerKey.currentState.openDrawer(),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FutureBuilder(
-                      future: _initializeVideoPlayer,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: AspectRatio(
-                                aspectRatio: _controller.value.aspectRatio,
-                                child: VideoPlayer(_controller),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    FlatButton(
-                      color: KSecondColor,
-                      onPressed: () {
-                        setState(() {
-                          if (_controller.value.isPlaying) {
-                            _controller.pause();
-                          } else {
-                            _controller.play();
-                          }
-                        });
-                      },
-                      child: Icon(
-                        _controller.value.isPlaying
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  left: 220,
-                  top: 580,
-                  child: FlatButton(
-                    onPressed: () => Navigator.of(context).pushNamed('/calendar'),
-                    child: FittedBox(
-                        child: Text(
-                          'Set Calender',
-                          style: TextStyle(
-                            color: Colors.white,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FutureBuilder(
+                    future: _initializeVideoPlayer,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
                           ),
-                        )),
-                    color: KSecondColor,
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  FlatButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      setState(() {
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        } else {
+                          _controller.play();
+                        }
+                      });
+                    },
+                    child: Icon(
+                      _controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                      color: KSecondColor,
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                left: 220,
+                top: 620,
+                child: FlatButton(
+                  onPressed: () => Navigator.of(context).pushNamed('/calendar'),
+                  child: FittedBox(
+                      child: Text(
+                        'Set Calender',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                  color: KSecondColor,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+}
+
+class ClippingClass extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0.0, size.height - 40);
+    path.quadraticBezierTo(size.width / 4, size.height, size.width / 2, size.height);
+    path.quadraticBezierTo(size.width - (size.width / 4), size.height, size.width, size.height - 40);
+    path.lineTo(size.width, 0.0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip (CustomClipper<Path> oldClipper) => false;
 }
