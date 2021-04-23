@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/screens/start_your_trip.dart';
 import './screens/examination_video_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/examination' : (context) => ExaminationScreen(),
         '/calendar' : (context) => CalendarScreen(),
         StartYourTrip.routeName : (context) => StartYourTrip(),
+        '/patient-calendar' : (context) => CalendarPatient(),
       },
     );
   }
