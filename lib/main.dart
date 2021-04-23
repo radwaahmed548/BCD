@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/screens/start_your_trip.dart';
-import './screens/examination_video_screen.dart';
+import 'screens/examination/examination_video_screen.dart';
 import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';

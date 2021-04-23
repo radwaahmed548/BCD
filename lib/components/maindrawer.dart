@@ -33,19 +33,36 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             ),
-            ListTile(
+            GestureDetector(
+              onTap: (){ Navigator.pushNamed(context, '/home');} ,
+              child: ListTile(
 
-              title: Row(
-                children: [
+                title: Row(
+                  children: [
 
+                    Icon(Icons.home_filled),
+                    Container(width: 6,),
+                    Text('Home'),
+                  ],
+                ),
 
-                  Icon(Icons.supervised_user_circle),
-                  Container(width: 6,),
-                  Text('Profile'),
-
-                ]
               ),
+            ),
+            GestureDetector(
+              child: ListTile(
 
+                title: Row(
+                  children: [
+
+
+                    Icon(Icons.supervised_user_circle),
+                    Container(width: 6,),
+                    Text('Profile'),
+
+                  ]
+                ),
+
+              ),
             ),
             GestureDetector(
               //onTap: (),

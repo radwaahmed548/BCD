@@ -86,9 +86,7 @@ class _homescreenState extends State<homescreen> {
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {
-                            Navigator.of(context).pushNamed('/examination');
-                          },
+
                           child: Stack(
                             children: <Widget>[
 
@@ -132,15 +130,20 @@ class _homescreenState extends State<homescreen> {
                                           SizedBox(height: 30),
                                           Row(
                                             children: <Widget>[
-                                              Text(
-                                                'Know more',
-                                                style: TextStyle(
-                                                  fontFamily: 'Avenir',
-                                                  fontSize: 18,
-                                                  color: KSecondaryTextColor,
-                                                  fontWeight: FontWeight.w500,
+                                              GestureDetector(
+                                                onTap: (){
+                                                  Navigator.pushNamed(context, menue[index].action);
+                                                }
+                                                ,child: Text(
+                                                  'Know more',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Avenir',
+                                                    fontSize: 18,
+                                                    color: KSecondaryTextColor,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  textAlign: TextAlign.left,
                                                 ),
-                                                textAlign: TextAlign.left,
                                               ),
                                               Icon(
                                                 Icons.arrow_forward,

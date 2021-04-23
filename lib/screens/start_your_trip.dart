@@ -463,7 +463,9 @@ class _StartYourTripState extends State<StartYourTrip> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/patient-calendar');
+                          },
                           child: Text(
                             'Create Calendar',
                             style: TextStyle(
