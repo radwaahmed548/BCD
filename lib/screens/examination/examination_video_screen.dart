@@ -6,6 +6,7 @@ import 'package:video_player/video_player.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/components/maindrawer.dart';
+import 'package:chewie/chewie.dart';
 
 
 
@@ -17,13 +18,22 @@ class ExaminationScreen extends StatefulWidget {
 class _MyAppState extends State<ExaminationScreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   VideoPlayerController _controller;
+  ChewieController _chewieController;
   Future<void> _initializeVideoPlayer;
   @override
   void initState(){
-    _controller = VideoPlayerController.asset('videos/bc_exam.mp4');
-    _initializeVideoPlayer= _controller.initialize();
-    _controller.setLooping(true);
-    _controller.setVolume(1.0);
+    // _controller = VideoPlayerController.asset('videos/bc_exam.mp4');
+    // _initializeVideoPlayer= _controller.initialize();
+    // _controller.setLooping(true);
+    // _controller.setVolume(1.0);
+
+    _chewieController = ChewieController(
+      videoPlayerController: VideoPlayerController.asset('videos/bc_exam.mp4'),
+      autoInitialize: true,
+        looping: true,
+      allowFullScreen: true,
+      aspectRatio: 16/9,
+    );
 
 
 
@@ -55,26 +65,17 @@ class _MyAppState extends State<ExaminationScreen> {
               onPressed: () { _scaffoldkey.currentState.openDrawer();}
           ),
         ),
-          Positioned(
-            child: FutureBuilder(
-              future: _initializeVideoPlayer,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return ClipRRect(
+          Container(
+            height: 500,
+            width: double.infinity,
+            child:
+            ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
+                    child: Chewie(
+                      controller: _chewieController,
                     ),
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ),
+    )
+                ),
           SizedBox.expand(
             child: NotificationListener<DraggableScrollableNotification>(
               onNotification: (notification) {
@@ -125,13 +126,13 @@ class _MyAppState extends State<ExaminationScreen> {
                             itemCount: 1,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.all(5.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
                                     Container(height: 100,width: 200
                                         ,child: Text( 'Breast self-exam (BSE), or regularly examining your breasts on your own, can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
                                         style: TextStyle(color: Colors.black54),)),
-                                    SizedBox(width: 20),
+                                    SizedBox(width: 35),
                                     RaisedButton(onPressed: () {
                                       Navigator.pushNamed(context, '/calendar');
                                     },

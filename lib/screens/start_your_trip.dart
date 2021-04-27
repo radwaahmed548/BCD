@@ -35,65 +35,17 @@ class _StartYourTripState extends State<StartYourTrip> {
         child: new Text("Pick date range"));
   }
 
-  // void _presentedDate1() {
-  //   showDatePicker(
-  //
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2019),
-  //     lastDate: DateTime.now(),
-  //   ).then((selectedDate) {
-  //     if (selectedDate == null) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       _pickedDate1 = selectedDate;
-  //     });
-  //   });
-  // }
-
-  // void _presentedDate2() {
-  //   showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2019),
-  //     lastDate: DateTime.now(),
-  //   ).then((selectedDate) {
-  //     if (selectedDate == null) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       _pickedDate2 = selectedDate;
-  //     });
-  //   });
-  // }
-  //
-  // void _presentedDate3() {
-  //   showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2019),
-  //     lastDate: DateTime.now(),
-  //   ).then((selectedDate) {
-  //     if (selectedDate == null) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       _pickedDate3 = selectedDate;
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Kgradintstartcolor,
       key: _drawerKey,
       drawer: MainDrawer(),
       body: SafeArea(
         child: Stack(
           children: [
             Positioned(
-              top: 30,
+              top: 10,
               child: IconButton(
                 onPressed: () => _drawerKey.currentState.openDrawer(),
                 icon: Icon(Icons.menu, color: KSecondColor,),
@@ -460,23 +412,30 @@ class _StartYourTripState extends State<StartYourTrip> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: RaisedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/patient-calendar');
-                          },
-                          child: Text(
-                            'Create Calendar',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                      Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width:  130,
+                            decoration: new BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                color: KMainColor
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: FlatButton(
+                              onPressed: () => Navigator.of(context).pushNamed('/patient-calendar'),
+                              child: FittedBox(
+                                child: Text(
+                                    'Create Calendar',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+
+                              ),
                             ),
                           ),
-                          color: KSecondaryTextColor,
-                        ),
-                      ),
                     ],
                   ),
                 ],

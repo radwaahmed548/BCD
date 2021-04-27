@@ -11,7 +11,7 @@ class RegisterScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       body: Background(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

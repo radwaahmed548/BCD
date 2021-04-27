@@ -10,8 +10,7 @@ class LoginScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
 
 
       body: Background(
@@ -116,7 +115,7 @@ class LoginScreen extends StatelessWidget {
 
             Container(
               alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              margin: EdgeInsets.symmetric(horizontal: 55, vertical: 10),
               child: GestureDetector(
                 onTap: () => {
                   Navigator.pushNamed(context, '/register')

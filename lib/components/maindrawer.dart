@@ -41,8 +41,8 @@ class MainDrawer extends StatelessWidget {
                   children: [
 
                     Icon(Icons.home_filled),
-                    Container(width: 6,),
-                    Text('Home'),
+
+                    Text('  Home'),
                   ],
                 ),
 
@@ -54,10 +54,9 @@ class MainDrawer extends StatelessWidget {
                 title: Row(
                   children: [
 
-
                     Icon(Icons.supervised_user_circle),
-                    Container(width: 6,),
-                    Text('Profile'),
+
+                    Text('  Profile'),
 
                   ]
                 ),
@@ -72,8 +71,8 @@ class MainDrawer extends StatelessWidget {
                   children: [
 
                     Icon(Icons.help),
-                    Container(width: 6,),
-                    Text('help center'),
+
+                    Text('  help center'),
                   ],
                 ),
 
@@ -85,10 +84,10 @@ class MainDrawer extends StatelessWidget {
 
                 title: Row(
                   children: [
+                    Text(' '),
+                    Icon(Icons.logout),
 
-                    Icon(Icons.arrow_back),
-                    Container(width: 6,),
-                    Text('Logout'),
+                    Text(' Logout'),
                   ],
                 ),
 
