@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gp/machine learning model/Questions.dart';
 
 class MenueInfo {
   final int position;
@@ -34,6 +35,6 @@ List<MenueInfo> menue = [
       description:
      'If you have some doubts, we will assist you in confirming or denying them through medical reports,and some questions we will predict the results',
     image: 'images/9.jpeg',
-    action: '/'
+    action: '/questions'
   ),
 ];
