@@ -10,6 +10,10 @@ import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
 import 'home/home.dart';
+import 'screens/Community.dart';
+import 'screens/SavedPosts.dart';
+import 'screens/Stories.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -42,6 +46,9 @@ class MyApp extends StatelessWidget {
         '/questions' : (context) => MyAppi(),
         '/result1' : (context) => ResultTrue(),
         '/result2' : (context) => ResultFalse(),
+        '/Community':(context)  => Community(),
+        '/SavedPosts':(context)  => SavedPosts(),
+        '/Stories':(context)  => Stories(),
 
       },
     );
