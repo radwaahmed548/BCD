@@ -64,6 +64,22 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onTap: (){ Navigator.pushNamed(context, '/Community');} ,
+              child: ListTile(
+
+                title: Row(
+                    children: [
+
+                      Icon(Icons.post_add_sharp),
+
+                      Text('  community'),
+
+                    ]
+                ),
+
+              ),
+            ),
+            GestureDetector(
               //onTap: (),
               child: ListTile(
 

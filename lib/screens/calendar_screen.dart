@@ -61,32 +61,6 @@ class CalendarScreen extends StatelessWidget {
 
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-
-                    alignment: Alignment.center,
-                    height: 50.0,
-                    width:  100,
-                    decoration: new BoxDecoration(
-                        borderRadius: BorderRadius.circular(80.0),
-                        color: KMainColor
-                    ),
-                    padding: const EdgeInsets.all(0),
-                    child: FlatButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/Community');},
-                      child: FittedBox(
-                        child: Text(
-                            'Community',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              // fontFamily: 'Robotomono',
-                            )),
-                      ),
-                    ),
-                  ),
-
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(

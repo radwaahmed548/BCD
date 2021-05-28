@@ -132,7 +132,7 @@ class _MyAppState extends State<ExaminationScreen> {
                                     Container(height: 100,width: 200
                                         ,child: Text( 'Breast self-exam (BSE), or regularly examining your breasts on your own, can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
                                         style: TextStyle(color: Colors.black54),)),
-                                    SizedBox(width: 35),
+                                    SizedBox(width: 25),
                                     RaisedButton(onPressed: () {
                                       Navigator.pushNamed(context, '/calendar');
                                     },
