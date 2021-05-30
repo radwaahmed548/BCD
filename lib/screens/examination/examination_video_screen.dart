@@ -56,7 +56,7 @@ class _MyAppState extends State<ExaminationScreen> {
       body: Stack(
         children: [
           Positioned
-          (top: 60,
+          (top: 50,
           child: IconButton(icon: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Icon(Icons.menu,color:KMainColor
@@ -87,6 +87,7 @@ class _MyAppState extends State<ExaminationScreen> {
               child: DraggableScrollableSheet(
                 initialChildSize: 0.3,
                 minChildSize: 0.3,
+                maxChildSize: 1.0,
                 builder:
                     (BuildContext context, ScrollController scrollController) {
                   return Container(
@@ -99,7 +100,7 @@ class _MyAppState extends State<ExaminationScreen> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 4,
+                          blurRadius: 10,
                           color: Colors.black45,
                           offset: Offset(-1, -1),
                         )

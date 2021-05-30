@@ -18,7 +18,7 @@ class _MyAppiState extends State<MyAppi> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: KSecondaryTextColor,
+      backgroundColor: Color(0xFFf3abcb),
       body: body(),
     );
   }
@@ -33,7 +33,10 @@ class _MyAppiState extends State<MyAppi> {
         Positioned(
           child: Image.asset(
               "images/questions.jpg",
-              width: size.width
+            width: size.width,
+
+
+
           ),
         ),
 
@@ -55,13 +58,8 @@ class _MyAppiState extends State<MyAppi> {
                     topLeft: Radius.circular(extent == 1.0 ? 0 : 16),
                     topRight: Radius.circular(extent == 1.0 ? 0 : 16),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 8,
-                      color: KMainColor,
-                      offset: Offset(-1, -1),
-                    )
-                  ],
+
+
                   color: Kgradintstartcolor,
                 ),
                 child: Column(
@@ -69,7 +67,7 @@ class _MyAppiState extends State<MyAppi> {
                     Visibility(
                       visible: extent != 1.0,
                       child: Container(
-                        margin: EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 20),
                         height: 5,
                         width: 50,
                         decoration: BoxDecoration(
@@ -83,7 +81,7 @@ class _MyAppiState extends State<MyAppi> {
                       child: ListView(
                         controller: scrollController,
                         children: [
-                          SizedBox(height: size.height * 0.03),
+
 
                           Container(
                             alignment: Alignment.center,
