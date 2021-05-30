@@ -46,8 +46,8 @@ class _MyAppiState extends State<MyAppi> {
         Positioned(
           top: 60,
           child: IconButton(
-            onPressed: () => _drawerKey.currentState.openDrawer(),
-            icon: Icon(Icons.menu,color: KMainColor,),
+            onPressed: () => _drawerkey.currentState.openDrawer(),
+            icon: Icon(Icons.menu,color: Colors.white,),
           ),
         ),
 
@@ -153,6 +153,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Radius",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -168,6 +173,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -191,6 +201,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Fractal Dimension",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -206,6 +221,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -226,6 +246,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -252,6 +277,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Area",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -267,6 +297,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -290,6 +325,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Symmetry",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -309,6 +349,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Perimeter",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -324,6 +369,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -347,6 +397,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Mean Feactal Dimension",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -362,6 +417,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -385,6 +445,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Texture Error",
                                 filled: true,
                                 fillColor:  Kgradintstartcolor,
@@ -400,6 +465,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -423,6 +493,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color: KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Smoothness Error",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -438,6 +513,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -461,6 +541,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Concavity Error",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -476,6 +561,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -499,6 +589,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Perimeter",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -514,6 +609,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -537,6 +637,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Feactal Dimension Error",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -552,6 +657,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -575,6 +685,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Worst Radius",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -590,6 +705,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -613,6 +733,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Worst Smoothness",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -628,6 +753,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -657,6 +787,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Worst Area",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -672,6 +807,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -695,6 +835,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Worst Symmetry",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -714,6 +859,11 @@ class _MyAppiState extends State<MyAppi> {
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
                                 labelText: "Worst Perimeter",
                                 filled: true,
                                 fillColor: Kgradintstartcolor,
@@ -729,6 +879,11 @@ class _MyAppiState extends State<MyAppi> {
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:KSecondaryTextColor),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color:KSecondaryTextColor),
                                     borderRadius: BorderRadius.all(Radius.circular(20))
