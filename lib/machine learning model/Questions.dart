@@ -3,14 +3,16 @@ import 'package:gp/components/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/machine learning model/Result1.dart';
 import 'package:gp/machine learning model/Result2.dart';
-
+import 'package:gp/components/maindrawer.dart';
 
 class MyAppi extends StatefulWidget {
+
   @override
   _MyAppiState createState() => _MyAppiState();
 }
 
 class _MyAppiState extends State<MyAppi> {
+  GlobalKey<ScaffoldState> _drawerkey = GlobalKey<ScaffoldState>();
   double extent = 0;
 
 
@@ -18,6 +20,8 @@ class _MyAppiState extends State<MyAppi> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      key: _drawerkey,
+      drawer: MainDrawer(),
       backgroundColor: Color(0xFFf3abcb),
       body: body(),
     );
@@ -37,6 +41,13 @@ class _MyAppiState extends State<MyAppi> {
 
 
 
+          ),
+        ),
+        Positioned(
+          top: 60,
+          child: IconButton(
+            onPressed: () => _drawerKey.currentState.openDrawer(),
+            icon: Icon(Icons.menu,color: KMainColor,),
           ),
         ),
 
@@ -761,7 +772,36 @@ class _MyAppiState extends State<MyAppi> {
                               ),
                             ),
                           ),
-
+                          Container(
+                            alignment: Alignment.centerRight,
+                            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                            child: RaisedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/result1');
+                              },
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                              textColor: Colors.white,
+                              padding: const EdgeInsets.all(0),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 50.0,
+                                width: size.width * 0.5,
+                                decoration: new BoxDecoration(
+                                    borderRadius: BorderRadius.circular(80.0),
+                                    color: KMainColor
+                                ),
+                                padding: const EdgeInsets.all(0),
+                                child: Text(
+                                  "Submit",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Robotomono"
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
