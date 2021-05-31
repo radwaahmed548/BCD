@@ -55,29 +55,18 @@ class _homescreenState extends State<homescreen> {
                     child: Column(
                       children: <Widget>[
 
-                        Center(
-                          child: Text(
-                            'Explore',
-                            style: TextStyle(
-                              fontFamily: 'Avenir',
-                              fontSize: 44,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w900,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
+
 
                       ],
                     ),
                   ),
                   Container(
-                      height: size.height * 0.75,
+                      height: size.height * 0.80,
                     padding: const EdgeInsets.only(left: 10),
 
                     child: Swiper(
                       itemCount: 2,
-                      itemWidth: MediaQuery.of(context).size.width - 2 * 40,
+                      itemWidth: MediaQuery.of(context).size.width - 2 * 50,
                       layout: SwiperLayout.STACK,
                       pagination: SwiperPagination(
 
@@ -92,7 +81,7 @@ class _homescreenState extends State<homescreen> {
 
                               Column(
                                 children: <Widget>[
-                                  SizedBox(height: 130),
+                                  SizedBox(height: size.height * 0.150,),
                                   Card(
                                     elevation: 5,
                                     shape: RoundedRectangleBorder(
@@ -106,7 +95,7 @@ class _homescreenState extends State<homescreen> {
                                         CrossAxisAlignment.start,
                                         children: <Widget>[
 
-                                          SizedBox(height: 50),
+                                          SizedBox(height: 70),
                                           Text(
                                             menue[index].name,
                                             style: TextStyle(
@@ -127,7 +116,7 @@ class _homescreenState extends State<homescreen> {
                                             ),
                                             textAlign: TextAlign.left,
                                           ),
-                                          SizedBox(height: 30),
+                                          SizedBox(height: 15),
                                           Row(
                                             children: <Widget>[
                                               GestureDetector(

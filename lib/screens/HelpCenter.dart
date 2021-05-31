@@ -18,16 +18,16 @@ class _HelpCenterState extends State<HelpCenter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Kgradintstartcolor,
       key: _drawerKey,
       drawer: MainDrawer(),
       body: Padding(
-        padding: EdgeInsets.only(left: 16, top: 20, right: 16, bottom: 16),
+        padding: EdgeInsets.only(left: 20, top: 40, right: 16, bottom: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Positioned(
-              top: 0,
-              left: 0,
+
               child: IconButton(
                 onPressed: () => _drawerKey.currentState.openDrawer(),
                 icon: Icon(
@@ -36,15 +36,18 @@ class _HelpCenterState extends State<HelpCenter> {
                 ),
               ),
             ),
-            Text(
-              "Please select the type of the feedback Or Enter other Problems",
-              style: TextStyle(
-                color: KprimaryTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
+            Padding(
+              padding: const EdgeInsets.only(top:10.0),
+              child: Text(
+                "Please select the type of the feedback Or Enter other Problems",
+                style: TextStyle(
+                  color: KprimaryTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
               ),
             ),
-            SizedBox(height: 25.0),
+            SizedBox(height: 10.0),
             GestureDetector(
               child: buildCheckItem(
                   title: "Login trouble", isSelected: isTypeSelected[0]),
@@ -91,7 +94,7 @@ class _HelpCenterState extends State<HelpCenter> {
               },
             ),
             SizedBox(
-              height: 20.0,
+              height: 10.0,
             ),
             emailFeedbackForm(),
             SizedBox(height: 5.0),
@@ -101,15 +104,35 @@ class _HelpCenterState extends State<HelpCenter> {
             Row(
               children: [
                 // ignore: deprecated_member_use
-                FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "SUBMIT",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:150.0,left: 100),
+                  child: RaisedButton(onPressed: () {
+                    Navigator.pushNamed(context, '/calendar');
+                  },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.all(0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50.0,
+                      width: 130,
+
+                      decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(80.0),
+                          color: KMainColor
+                      ),
+                      padding: const EdgeInsets.all(0),
+                      child: Text(
+                        'Submit',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          //fontFamily: 'A',
+                        ),
+                      ),
+                    ),
                   ),
-                  color: KMainColor,
-                  padding: EdgeInsets.all(16.0),
                 ),
               ],
             )

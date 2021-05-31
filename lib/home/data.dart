@@ -25,7 +25,7 @@ List<MenueInfo> menue = [
       name: 'Examination',
 
       description:
-  'Breast self-exam (BSE), or regularly examining your breasts on your own, can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
+  'Breast self-exam (BSE),  can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
     image: 'images/test.png',
     action: '/examination',
     ),

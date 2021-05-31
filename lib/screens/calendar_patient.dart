@@ -15,6 +15,7 @@ class CalendarPatient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _drawerKey,
       drawer: MainDrawer(),
@@ -22,14 +23,14 @@ class CalendarPatient extends StatelessWidget {
         ClipPath(
           clipper: ClippingClass(),
           child: Container(
-            height: 550,
+            height: size.height * 0.70,
             decoration: BoxDecoration(
                 color: Kgradintstartcolor
             ),
           ),
         ),
         Positioned(
-          top: 60,
+          top: 50,
           child: IconButton(
             onPressed: () => _drawerKey.currentState.openDrawer(),
             icon: Icon(Icons.menu,color: KMainColor,),
@@ -54,77 +55,55 @@ class CalendarPatient extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 25.0),
-              child: Row(
+            Row(
 
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+
+
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
 
                     alignment: Alignment.center,
-                    height: 50.0,
-                    width:  100,
+                    height:50.0,
+                    width:  130,
                     decoration: new BoxDecoration(
                         borderRadius: BorderRadius.circular(80.0),
                         color: KMainColor
                     ),
                     padding: const EdgeInsets.all(0),
                     child: FlatButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/Community');},
-                      child: FittedBox(
-                        child: Text(
-                            'Community',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              // fontFamily: 'Robotomono',
-                            )),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-
-                      alignment: Alignment.center,
-                      height: 50.0,
-                      width:  130,
-                      decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(80.0),
-                          color: KMainColor
-                      ),
-                      padding: const EdgeInsets.all(0),
-                      child: FlatButton(
-                        onPressed: (){
-                          showDialog(context: context, builder: (context) => CustomDialog(
-                            title: "Calender Updated",
-                            description: "In 30 days We are Going to Inform You",
-                          ));
-                        },
-                        child: Column(
-                          children: [
-                            FittedBox(
+                      onPressed: (){
+                        showDialog(context: context, builder: (context) => CustomDialog(
+                          title: "Calender Updated",
+                          description: "In 30 days We are Going to Inform You",
+                        ));
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FittedBox(
                               child: Text(
                                   'update',
+
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
+                                    fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     // fontFamily: 'Robotomono',
                                   )),
                             ),
-                            IconButton(icon: Icon(Icons.chat), onPressed: (){Navigator.pushNamed(context, '/calendar');})
-                          ],
-                        ),
+                          ),
+
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

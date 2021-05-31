@@ -55,13 +55,13 @@ class ResultFalse extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: size.height * 0.11),
+                  SizedBox(height: size.height * 0.10),
 
                   Column(
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
                         child: Text(
                           "CONGRATULATIONS, YOU HAVE A GOOD HEALTH!!",
                           style: TextStyle(
@@ -75,17 +75,17 @@ class ResultFalse extends StatelessWidget {
 
                       ),
 
-                      SizedBox(height: size.height * 0.03),
+                      SizedBox(height: size.height * 0.02),
 
                       Container(
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.symmetric(horizontal: 40),
                         child: Text(
-                              "The practice of a woman to get to know her own breasts and as such to be able to detect any changes rapidly. Breast Self Examination (BSE) remains an effective method to raise “Breast Awareness”. \n",
+                              " Breast Self Examination (BSE) remains an effective method to raise “Breast Awareness”. \n",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.grey,
-                              fontSize: 18,
+                              fontSize: 15,
                               fontFamily: "Raleway"
                           ),
                           textAlign: TextAlign.left,
@@ -96,13 +96,13 @@ class ResultFalse extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.only(bottom:60,right: 30),
                     child: Container(
                       alignment: Alignment.centerRight,
                       //margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: RaisedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushNamed(context, '/examination');
                         },
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
                         textColor: Colors.white,

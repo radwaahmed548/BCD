@@ -6,7 +6,7 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: Container(
 
-        color: Colors.white,
+        color: Kgradintstartcolor,
         child: ListView(
 
           padding: EdgeInsets.only(top:0,),
@@ -81,7 +81,7 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             GestureDetector(
-                onTap: (){ Navigator.pushNamed(context, '/HelpCenter');} ,
+                onTap: (){ Navigator.pushNamed(context, '/helpcenter');} ,
               child: ListTile(
 
                 title: Row(

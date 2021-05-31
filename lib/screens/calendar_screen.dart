@@ -16,6 +16,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _drawerKey,
       drawer: MainDrawer(),
@@ -23,14 +24,14 @@ class CalendarScreen extends StatelessWidget {
         ClipPath(
           clipper: ClippingClass(),
           child: Container(
-            height: 550,
+            height: size.height * 0.75,
             decoration: BoxDecoration(
                 color: Kgradintstartcolor
             ),
           ),
         ),
         Positioned(
-          top: 60,
+          top: 50,
           child: IconButton(
             onPressed: () => _drawerKey.currentState.openDrawer(),
             icon: Icon(Icons.menu,color: KMainColor,),

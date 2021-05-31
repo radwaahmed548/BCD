@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: kSpacingUnit.w * 5,
-                  backgroundImage: AssetImage('images/usericon.png'),
+                  backgroundImage: AssetImage('images/7-512.png'),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                       widthFactor: kSpacingUnit.w * 1.5,
                       child: Icon(
                         LineAwesomeIcons.pen,
-                        color: kDarkPrimaryColor,
+                        color:Kgradintstartcolor,
                         size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
                       ),
                     ),
@@ -135,22 +135,31 @@ class ProfileScreen extends StatelessWidget {
                   icon: LineAwesomeIcons.ribbon,
                   text: 'My Profile',
                 ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.calendar,
-                  text: 'My Calender',
+                GestureDetector(
+                  onTap:(){ Navigator.pushNamed(context, '/calendar');},
+                  child: ProfileListItem(
+                    icon: LineAwesomeIcons.calendar,
+                    text: 'My Calender',
+                  ),
                 ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.handshake,
-                  text: 'Community',
+                GestureDetector
+                  ( onTap:(){ Navigator.pushNamed(context,  '/Community');},
+                  child: ProfileListItem(
+                    icon: LineAwesomeIcons.handshake,
+                    text: 'Community',
+                  ),
                 ),
                 ProfileListItem(
                   icon: LineAwesomeIcons.bookmark,
                   text: 'Favorite Posts',
                 ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.alternate_sign_out,
-                  text: 'Logout',
-                  hasNavigation: false,
+                GestureDetector(
+                  onTap:(){ Navigator.pushNamed(context,  '/');},
+                  child: ProfileListItem(
+                    icon: LineAwesomeIcons.alternate_sign_out,
+                    text: 'Logout',
+                    hasNavigation: false,
+                  ),
                 ),
               ],
             ),

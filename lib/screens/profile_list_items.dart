@@ -31,7 +31,7 @@ class ProfileListItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-        color: KSecondColor,
+        color:Kgradintstartcolor,
       ),
       child: Row(
         children: <Widget>[

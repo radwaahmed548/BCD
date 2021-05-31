@@ -26,7 +26,7 @@ class ResultTrue extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
 
-                  SizedBox(height: size.height * 0.03),
+                  SizedBox(height: size.height * 0.05),
 
                   Container(
 
@@ -49,7 +49,7 @@ class ResultTrue extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: size.height * 0.03),
+                  SizedBox(height: size.height * 0.007),
 
 
                   Column(
@@ -97,13 +97,13 @@ class ResultTrue extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.only(bottom: 30,right: 30),
                     child: Container(
                       alignment: Alignment.centerRight,
                       //margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: RaisedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushNamed(context, '/trip-screen');
                         },
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
                         textColor: Colors.white,
@@ -118,7 +118,7 @@ class ResultTrue extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(0),
                           child: Text(
-                            "Set your Calender",
+                            "Start your trip",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,

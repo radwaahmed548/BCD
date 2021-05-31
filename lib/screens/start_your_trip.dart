@@ -57,31 +57,42 @@ class _StartYourTripState extends State<StartYourTrip> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Container(
                     height: 40,
-                    width: 250,
+                    width: 270,
                     child: Center(
                       child: Text(
                         'Start Your Trip',
                         style: TextStyle(
-                          color: KSecondColor,
+                          color:Colors.black54 ,
                           fontWeight: FontWeight.bold,
                           fontSize: 28,
                         ),
                       ),
                     ),
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: KSecondColor),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:KSecondaryTextColor),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color:KSecondaryTextColor),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        labelText: "first step",
+                        filled: true,
+                        fillColor: Kgradintstartcolor,
                       ),
-                      hintText: 'First Step',
                     ),
-                    onSubmitted: (_) {},
                   ),
                   _pickedDate1 == null
                       ? Row(
@@ -187,13 +198,20 @@ class _StartYourTripState extends State<StartYourTrip> {
                   Divider(color: KSecondColor,),
                   TextField(
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: KSecondColor),
+                          borderSide: BorderSide(
+                              color:KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
                       ),
-                      hintText: 'Second Step',
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color:KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
+                      labelText: "second step",
+                      filled: true,
+                      fillColor: Kgradintstartcolor,
                     ),
-                    onSubmitted: (_) {},
                   ),
                   _pickedDate2 == null
                       ? Row(
@@ -299,14 +317,20 @@ class _StartYourTripState extends State<StartYourTrip> {
                   Divider(color: KSecondColor,),
                   TextField(
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: KSecondColor),
+                          borderSide: BorderSide(
+                              color:KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
                       ),
-                      fillColor: KSecondColor,
-                      hintText: 'Third Step',
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color:KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
+                      labelText: "third step",
+                      filled: true,
+                      fillColor: Kgradintstartcolor,
                     ),
-                    onSubmitted: (_) {},
                   ),
                   _pickedDate3 == null
                       ? Row(
