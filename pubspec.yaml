@@ -35,6 +35,8 @@ dependencies:
   modal_bottom_sheet: ^1.0.0+1
   cached_network_image: ^2.2.0+1
   chewie: ^1.0.0
+  line_awesome_flutter: ^1.0.1
+  flutter_screenutil: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +89,17 @@ flutter:
      - family: RobotoMono
        fonts:
          - asset: fonts/RobotoMono-Italic-VariableFont_wght.ttf
+
+     - family: SFProText
+       fonts:
+        - asset: fonts/SF-Pro-Text-Thin.otf
+          weight: 100
+        - asset: fonts/SF-Pro-Text-Regular.otf
+          weight: 400
+        - asset: fonts/SF-Pro-Text-Medium.otf
+          weight: 500
+        - asset: fonts/SF-Pro-Text-Bold.otf
+          weight: 700
 
   #
   # For details regarding fonts from package dependencies,

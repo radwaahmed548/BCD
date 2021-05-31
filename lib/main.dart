@@ -13,6 +13,8 @@ import 'home/home.dart';
 import 'screens/Community.dart';
 import 'screens/SavedPosts.dart';
 import 'screens/Stories.dart';
+import 'screens/profile.dart';
+import 'screens/HelpCenter.dart';
 
 
 void main() {
@@ -49,6 +51,8 @@ class MyApp extends StatelessWidget {
         '/Community':(context)  => Community(),
         '/SavedPosts':(context)  => SavedPosts(),
         '/Stories':(context)  => Stories(),
+        '/profile': (context) => ProfileScreen(),
+        '/helpcenter': (context) => HelpCenter(),
 
       },
     );

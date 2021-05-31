@@ -49,6 +49,7 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onTap: (){ Navigator.pushNamed(context, '/profile');} ,
               child: ListTile(
 
                 title: Row(
@@ -80,7 +81,7 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              //onTap: (),
+                onTap: (){ Navigator.pushNamed(context, '/HelpCenter');} ,
               child: ListTile(
 
                 title: Row(
