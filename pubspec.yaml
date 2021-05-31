@@ -92,14 +92,14 @@ flutter:
 
      - family: SFProText
        fonts:
-        - asset: fonts/SF-Pro-Text-Thin.otf
-          weight: 100
-        - asset: fonts/SF-Pro-Text-Regular.otf
-          weight: 400
-        - asset: fonts/SF-Pro-Text-Medium.otf
-          weight: 500
-        - asset: fonts/SF-Pro-Text-Bold.otf
-          weight: 700
+         - asset: fonts/SF-Pro-Text-Thin.otf
+           weight: 100
+         - asset: fonts/SF-Pro-Text-Regular.otf
+           weight: 400
+         - asset: fonts/SF-Pro-Text-Medium.otf
+           weight: 500
+         - asset: fonts/SF-Pro-Text-Bold.otf
+           weight: 700
 
   #
   # For details regarding fonts from package dependencies,
