@@ -41,8 +41,14 @@ class CalendarPatient extends StatelessWidget {
           children: [
             SizedBox(),
             TableCalendar(
+
+              formatAnimation: FormatAnimation.slide,
+              events: ({
+                DateTime.now(): ['Hello', 'Bye', 'hello'],
+                DateTime.now().add(Duration(days: 7)): ['hey', 'bye'],
+              }),
               calendarController: _controller,
-              headerVisible: false,
+              //headerVisible: false,
               calendarStyle: CalendarStyle(
                   selectedColor: KMainColor,
                   outsideStyle: TextStyle(
@@ -64,41 +70,32 @@ class CalendarPatient extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
-
                     alignment: Alignment.center,
-                    height:50.0,
-                    width:  130,
+                    height: 50.0,
+                    width:  100,
                     decoration: new BoxDecoration(
                         borderRadius: BorderRadius.circular(80.0),
                         color: KMainColor
                     ),
                     padding: const EdgeInsets.all(0),
                     child: FlatButton(
-                      onPressed: (){
-                        showDialog(context: context, builder: (context) => CustomDialog(
-                          title: "Calender Updated",
-                          description: "In 30 days We are Going to Inform You",
-                        ));
+                      onPressed: () {
+                        // showDialog(context: context,builder: (context) => CustomDialog(
+                        //   title: "Calender Updated",
+                        //   description: "In 30 days We are Going to Inform You",
+                        // ));
+                        Navigator.of(context).pushNamed(StartYourTrip.routeName);
+
                       },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: FittedBox(
-                              child: Text(
-                                  'update',
-
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    // fontFamily: 'Robotomono',
-                                  )),
-                            ),
-                          ),
-
-                        ],
+                      child: FittedBox(
+                        child: Text(
+                            'Update',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              //fontFamily: 'Robotomono',
+                            )),
                       ),
                     ),
                   ),

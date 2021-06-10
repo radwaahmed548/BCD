@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/background.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/models/cal_patient.dart';
 import 'package:intl/intl.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
+import 'package:provider/provider.dart';
 
 class StartYourTrip extends StatefulWidget {
   static const routeName = '/trip-screen';
@@ -18,22 +20,22 @@ class _StartYourTripState extends State<StartYourTrip> {
   List<DateTime> _pickedDate2;
   List<DateTime> _pickedDate3;
 
-  void _datePickerButton() {
-    MaterialButton(
-        color: Colors.deepOrangeAccent,
-        onPressed: () async {
-          final List<DateTime> picked = await DateRangePicker.showDatePicker(
-              context: context,
-              initialFirstDate: new DateTime.now(),
-              initialLastDate: (new DateTime.now()).add(new Duration(days: 7)),
-              firstDate: new DateTime(2015),
-              lastDate: new DateTime(DateTime.now().year + 2));
-          if (picked != null && picked.length == 2) {
-            print(picked);
-          }
-        },
-        child: new Text("Pick date range"));
-  }
+  // void _datePickerButton() {
+  //   MaterialButton(
+  //       color: Colors.deepOrangeAccent,
+  //       onPressed: () async {
+  //         final List<DateTime> picked = await DateRangePicker.showDatePicker(
+  //             context: context,
+  //             initialFirstDate: new DateTime.now(),
+  //             initialLastDate: (new DateTime.now()).add(new Duration(days: 7)),
+  //             firstDate: new DateTime(2015),
+  //             lastDate: new DateTime(DateTime.now().year + 2));
+  //         if (picked != null && picked.length == 2) {
+  //           print(picked);
+  //         }
+  //       },
+  //       child: new Text("Pick date range"));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                   ),
                   Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    //margin: EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -122,7 +124,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                                         initialFirstDate: new DateTime.now(),
                                         initialLastDate: (new DateTime.now())
                                             .add(new Duration(days: 7)),
-                                        firstDate: new DateTime(2015),
+                                        firstDate: new DateTime(2020),
                                         lastDate: new DateTime(
                                             DateTime.now().year + 2));
                                 if (picked != null && picked.length == 2) {
@@ -130,6 +132,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate1 = picked;
                                   });
+                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate1[0], _pickedDate1[1]);
                                 }
                               },
                               child: Text(
@@ -249,6 +252,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate2 = picked;
                                   });
+                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate2[0], _pickedDate2[1]);
                                 }
                               },
                               child: Text(
@@ -368,6 +372,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate3 = picked;
                                   });
+                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate3[0], _pickedDate3[1]);
                                 }
                               },
                               child: Text(

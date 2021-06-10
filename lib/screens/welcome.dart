@@ -65,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/register');
               },
               child: Text(
-                'Sign up',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'Courgette',color: Colors.white),
+                'Sign up',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
               ),
             ),
           )),
@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/login');
                   },
                   child: Text(
-                    'Sign in',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'Courgette',color: Colors.white),
+                    'Sign in',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
                   ),
                 ),
               ))

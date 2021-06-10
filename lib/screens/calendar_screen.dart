@@ -1,21 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gp/components/background.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/models/cal_normal.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/start_your_trip.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 import '../components/tools.dart';
 import '../components/tools.dart';
 
-class CalendarScreen extends StatelessWidget {
+FlutterLocalNotificationsPlugin notificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+class CalendarScreen extends StatefulWidget {
+  @override
+  _CalendarScreenState createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey<ScaffoldState>();
   CalendarController _controller = CalendarController();
 
+
+  @override
+  void initState() {
+    initializeSetting();
+    tz.initializeTimeZones();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    Provider.of<CalNormal>(context).fetchData();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final calendarDate = Provider.of<CalNormal>(context);
+    final currentDate = calendarDate.currentDate;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _drawerKey,
@@ -43,7 +71,7 @@ class CalendarScreen extends StatelessWidget {
             SizedBox(),
             TableCalendar(
               calendarController: _controller,
-              headerVisible: false,
+              //headerVisible: false,
               calendarStyle: CalendarStyle(
                   selectedColor: KMainColor,
                   outsideStyle: TextStyle(
@@ -79,6 +107,9 @@ class CalendarScreen extends StatelessWidget {
                             title: "Calender Updated",
                             description: "In 30 days We are Going to Inform You",
                           ));
+                          Provider.of<CalNormal>(context, listen: false).addCalendar(_controller.selectedDay);
+                          //print(currentDate[0].dateOfExam);
+                          displayNotification('Your Next Examination Day is Tmw!', DateTime.now().add(Duration(seconds: 5)));
                         },
                         child: FittedBox(
                           child: Text(
@@ -87,7 +118,7 @@ class CalendarScreen extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                // fontFamily: 'Robotomono',
+                                //fontFamily: 'Robotomono',
                               )),
                         ),
                       ),
@@ -101,6 +132,28 @@ class CalendarScreen extends StatelessWidget {
       ]),
     );
   }
+}
+
+Future<void> displayNotification(String data, DateTime dateTime) async {
+  notificationsPlugin.zonedSchedule(
+      0,
+      data,
+      'Reminder!',
+      tz.TZDateTime.from(dateTime, tz.local),
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+            'channel id', 'channel name', 'channel description'),
+      ),
+      uiLocalNotificationDateInterpretation:
+      UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true
+  );
+}
+
+void initializeSetting() async {
+  var initializeAndroid = AndroidInitializationSettings('my_logo');
+  var initializeSetting = InitializationSettings(android: initializeAndroid);
+  await notificationsPlugin.initialize(initializeSetting);
 }
 
 class ClippingClass extends CustomClipper<Path> {
