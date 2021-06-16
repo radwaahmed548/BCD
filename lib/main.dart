@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gp/machine%20learning%20model/Result2.dart';
 import 'package:gp/models/cal_normal.dart';
 import 'package:gp/models/cal_patient.dart';
+import 'package:gp/models/login_auth.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/screens/start_your_trip.dart';
@@ -18,7 +19,8 @@ import 'screens/SavedPosts.dart';
 import 'screens/Stories.dart';
 import 'screens/profile.dart';
 import 'screens/HelpCenter.dart';
-
+import 'models/login_auth.dart';
+import 'screens/SplashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,40 +33,54 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
+            value: Auth(),
+        ),
+        ChangeNotifierProvider.value(
         value: CalPatient(),
         ),
         ChangeNotifierProvider.value(value: CalNormal(),),
       ],
-        child: MaterialApp(
+        child: Consumer<Auth>(
+          builder: (ctx, auth, _) =>  MaterialApp(
 
-          title: 'Flutter Login',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.light,
-            primaryColor: Color(0xFF2661FA),
-            scaffoldBackgroundColor: Colors.white,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+            title: 'Flutter Login',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              brightness: Brightness.light,
+              primaryColor: Color(0xFF2661FA),
+              scaffoldBackgroundColor: Colors.white,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: auth.isAuth
+                ? homescreen()
+                : FutureBuilder(
+              future: auth.tryAutoLogin(),
+              builder: (ctx, authResultSnapshot) =>
+              authResultSnapshot.connectionState ==
+                  ConnectionState.waiting
+                  ? SplashScreen()
+                  : LoginScreen(),
+            ),
+            routes: {
+
+              '/login' : (context) => LoginScreen(),
+              '/register' : (context) => RegisterScreen(),
+              '/home' : (context) => homescreen(),
+              '/examination' : (context) => ExaminationScreen(),
+              '/calendar' : (context) => CalendarScreen(),
+              StartYourTrip.routeName : (context) => StartYourTrip(),
+              '/patient-calendar' : (context) => CalendarPatient(),
+              '/questions' : (context) => MyAppi(),
+              '/result1' : (context) => ResultTrue(),
+              '/result2' : (context) => ResultFalse(),
+              '/Community':(context)  => Community(),
+              '/SavedPosts':(context)  => SavedPosts(),
+              '/Stories':(context)  => Stories(),
+              '/profile': (context) => ProfileScreen(),
+              '/helpcenter': (context) => HelpCenter(),
+
+            },
           ),
-          initialRoute: '/',
-          routes: {
-            '/' : (context) => WelcomeScreen(),
-            '/login' : (context) => LoginScreen(),
-            '/register' : (context) => RegisterScreen(),
-            '/home' : (context) => homescreen(),
-            '/examination' : (context) => ExaminationScreen(),
-            '/calendar' : (context) => CalendarScreen(),
-            StartYourTrip.routeName : (context) => StartYourTrip(),
-            '/patient-calendar' : (context) => CalendarPatient(),
-            '/questions' : (context) => MyAppi(),
-            '/result1' : (context) => ResultTrue(),
-            '/result2' : (context) => ResultFalse(),
-            '/Community':(context)  => Community(),
-            '/SavedPosts':(context)  => SavedPosts(),
-            '/Stories':(context)  => Stories(),
-            '/profile': (context) => ProfileScreen(),
-            '/helpcenter': (context) => HelpCenter(),
-
-          },
         ),
       );
   }

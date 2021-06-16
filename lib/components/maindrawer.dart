@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/models/login_auth.dart';
+import 'package:provider/provider.dart';
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -107,6 +109,7 @@ class MainDrawer extends StatelessWidget {
                     Text(' Logout'),
                   ],
                 ),
+                onTap: () {Provider.of<Auth>(context, listen: false).logout();},
 
               ),
             ),
