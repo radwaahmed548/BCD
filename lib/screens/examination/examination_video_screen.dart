@@ -15,7 +15,7 @@ class _MyAppState extends State<ExaminationScreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   VideoPlayerController _controller;
   ChewieController _chewieController;
-  Future<void> _initializeVideoPlayer;
+  //Future<void> _initializeVideoPlayer;
   @override
   void initState() {
     // _controller = VideoPlayerController.asset('videos/bc_exam.mp4');
@@ -117,12 +117,13 @@ class _MyAppState extends State<ExaminationScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
                                           height: 150,
-                                          width: 200,
+                                          width: size.width * 0.5,
                                           child: Text(
                                             'Breast self-exam (BSE), or regularly examining your breasts on your own, can be an important way to find breast cancer early when it’s more likely to be treated successfully. ',
                                             style:
                                                 TextStyle(color: Colors.black54, fontSize: 16.0,),
-                                          )),
+                                          ),
+                                      ),
                                     ),
                                     SizedBox(width: 25),
                                     RaisedButton(

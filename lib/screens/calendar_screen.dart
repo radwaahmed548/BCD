@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:gp/components/background.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/components/tools.dart';
 import 'package:gp/models/cal_normal.dart';
-import 'package:gp/screens/calendar_patient.dart';
-import 'package:gp/screens/start_your_trip.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
-
-import '../components/tools.dart';
 import '../components/tools.dart';
 
 FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -31,19 +26,30 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void initState() {
     initializeSetting();
     tz.initializeTimeZones();
+    //Provider.of<CalNormal>(context, listen: false).fetchData();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    Provider.of<CalNormal>(context).fetchData();
     super.didChangeDependencies();
   }
+
+  // void _saveDate() {
+  //   if(editedDate.id != null) {
+  //     Provider.of<CalNormal>(context, listen: false).updateDate(editedDate.id, editedDate);
+  //   } else {
+  //     Provider.of<CalNormal>(context, listen: false).addCalendar(editedDate.dateOfExam);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     final calendarDate = Provider.of<CalNormal>(context);
     final currentDate = calendarDate.currentDate;
+    final patientID = Provider.of<CalNormal>(context).userID;
+    var calendarNormal = CalendarNormal(dateOfExam: _controller.selectedDay);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _drawerKey,
@@ -71,6 +77,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             SizedBox(),
             TableCalendar(
               calendarController: _controller,
+              //endDay: currentDate[userID].dateOfExam.add(Duration(days: 21)),
               //headerVisible: false,
               calendarStyle: CalendarStyle(
                   selectedColor: KMainColor,
@@ -107,13 +114,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             title: "Calender Updated",
                             description: "In 30 days We are Going to Inform You",
                           ));
-                          Provider.of<CalNormal>(context, listen: false).addCalendar(_controller.selectedDay);
-                          //print(currentDate[0].dateOfExam);
+
+                            Provider.of<CalNormal>(context, listen: false).addCalendar(_controller.selectedDay);
+                          print(patientID);
                           displayNotification('Your Next Examination Day is Tmw!', DateTime.now().add(Duration(seconds: 5)));
                         },
                         child: FittedBox(
                           child: Text(
-                              'Update',
+                              'Save Calendar',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -151,7 +159,7 @@ Future<void> displayNotification(String data, DateTime dateTime) async {
 }
 
 void initializeSetting() async {
-  var initializeAndroid = AndroidInitializationSettings('my_logo');
+  var initializeAndroid = AndroidInitializationSettings('bcd_not');
   var initializeSetting = InitializationSettings(android: initializeAndroid);
   await notificationsPlugin.initialize(initializeSetting);
 }

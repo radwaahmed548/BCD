@@ -33,55 +33,62 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-            value: Auth(),
+          value: Auth(),
         ),
-        ChangeNotifierProvider.value(
-        value: CalPatient(),
-        ),
-        ChangeNotifierProvider.value(value: CalNormal(),),
-      ],
-        child: Consumer<Auth>(
-          builder: (ctx, auth, _) =>  MaterialApp(
-
-            title: 'Flutter Login',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              primaryColor: Color(0xFF2661FA),
-              scaffoldBackgroundColor: Colors.white,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-            ),
-            home: auth.isAuth
-                ? homescreen()
-                : FutureBuilder(
-              future: auth.tryAutoLogin(),
-              builder: (ctx, authResultSnapshot) =>
-              authResultSnapshot.connectionState ==
-                  ConnectionState.waiting
-                  ? SplashScreen()
-                  : LoginScreen(),
-            ),
-            routes: {
-
-              '/login' : (context) => LoginScreen(),
-              '/register' : (context) => RegisterScreen(),
-              '/home' : (context) => homescreen(),
-              '/examination' : (context) => ExaminationScreen(),
-              '/calendar' : (context) => CalendarScreen(),
-              StartYourTrip.routeName : (context) => StartYourTrip(),
-              '/patient-calendar' : (context) => CalendarPatient(),
-              '/questions' : (context) => MyAppi(),
-              '/result1' : (context) => ResultTrue(),
-              '/result2' : (context) => ResultFalse(),
-              '/Community':(context)  => Community(),
-              '/SavedPosts':(context)  => SavedPosts(),
-              '/Stories':(context)  => Stories(),
-              '/profile': (context) => ProfileScreen(),
-              '/helpcenter': (context) => HelpCenter(),
-
-            },
+        // ignore: missing_required_param
+        ChangeNotifierProxyProvider<Auth, CalPatient>(
+          update: (ctx, auth, prevData) => CalPatient(
+              auth.token,
+              auth.userID
           ),
         ),
-      );
+        // ignore: missing_required_param
+        ChangeNotifierProxyProvider<Auth, CalNormal>(
+          update: (ctx, auth, prevData) => CalNormal(
+            auth.token,
+            auth.userID
+          ),
+        ),
+      ],
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          title: 'Flutter Login',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primaryColor: Color(0xFF2661FA),
+            scaffoldBackgroundColor: Colors.white,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: auth.isAuth
+              ? homescreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? SplashScreen()
+                          : LoginScreen(),
+                ),
+          routes: {
+            '/login': (context) => LoginScreen(),
+            '/register': (context) => RegisterScreen(),
+            '/home': (context) => homescreen(),
+            '/examination': (context) => ExaminationScreen(),
+            '/calendar': (context) => CalendarScreen(),
+            StartYourTrip.routeName: (context) => StartYourTrip(),
+            '/patient-calendar': (context) => CalendarPatient(),
+            '/questions': (context) => MyAppi(),
+            '/result1': (context) => ResultTrue(),
+            '/result2': (context) => ResultFalse(),
+            '/Community': (context) => Community(),
+            '/SavedPosts': (context) => SavedPosts(),
+            '/Stories': (context) => Stories(),
+            '/profile': (context) => ProfileScreen(),
+            '/helpcenter': (context) => HelpCenter(),
+          },
+        ),
+      ),
+    );
   }
 }

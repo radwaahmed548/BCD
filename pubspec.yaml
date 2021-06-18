@@ -41,7 +41,6 @@ dependencies:
   http: ^0.13.3
   flutter_local_notifications: ^6.0.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -104,7 +103,6 @@ flutter:
            weight: 500
          - asset: fonts/SF-Pro-Text-Bold.otf
            weight: 700
-
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

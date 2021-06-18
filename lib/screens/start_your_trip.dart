@@ -50,7 +50,10 @@ class _StartYourTripState extends State<StartYourTrip> {
               top: 10,
               child: IconButton(
                 onPressed: () => _drawerKey.currentState.openDrawer(),
-                icon: Icon(Icons.menu, color: KSecondColor,),
+                icon: Icon(
+                  Icons.menu,
+                  color: KSecondColor,
+                ),
               ),
             ),
             Padding(
@@ -68,7 +71,7 @@ class _StartYourTripState extends State<StartYourTrip> {
                       child: Text(
                         'Start Your Trip',
                         style: TextStyle(
-                          color:Colors.black54 ,
+                          color: Colors.black54,
                           fontWeight: FontWeight.bold,
                           fontSize: 28,
                         ),
@@ -81,15 +84,13 @@ class _StartYourTripState extends State<StartYourTrip> {
                     child: TextField(
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color:KSecondaryTextColor),
-                            borderRadius: BorderRadius.all(Radius.circular(20))
-                        ),
+                            borderSide: BorderSide(color: KSecondaryTextColor),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color:KSecondaryTextColor),
-                            borderRadius: BorderRadius.all(Radius.circular(20))
-                        ),
+                            borderSide: BorderSide(color: KSecondaryTextColor),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         labelText: "first step",
                         filled: true,
                         fillColor: Kgradintstartcolor,
@@ -107,12 +108,12 @@ class _StartYourTripState extends State<StartYourTrip> {
                                 color: KSecondaryTextColor,
                                 child: Center(
                                     child: Text(
-                                      'No Date Chosen',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                    )),
+                                  'No Date Chosen',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                )),
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -132,7 +133,6 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate1 = picked;
                                   });
-                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate1[0], _pickedDate1[1]);
                                 }
                               },
                               child: Text(
@@ -157,15 +157,23 @@ class _StartYourTripState extends State<StartYourTrip> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(DateFormat.MMMd()
-                                        .format(_pickedDate1[0]), style: TextStyle(color: Colors.white),),
-                                    Text('  -  ', style: TextStyle(color: Colors.white)),
-                                    Text(DateFormat.MMMd()
-                                        .format(_pickedDate1[1]), style: TextStyle(color: Colors.white),),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate1[0]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text('  -  ',
+                                        style: TextStyle(color: Colors.white)),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate1[1]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Icon(Icons.calendar_today, color: Colors.white,),
+                                    Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.white,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -198,19 +206,17 @@ class _StartYourTripState extends State<StartYourTrip> {
                             )
                           ],
                         ),
-                  Divider(color: KSecondColor,),
+                  Divider(
+                    color: KSecondColor,
+                  ),
                   TextField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color:KSecondaryTextColor),
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
+                          borderSide: BorderSide(color: KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color:KSecondaryTextColor),
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
+                          borderSide: BorderSide(color: KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       labelText: "second step",
                       filled: true,
                       fillColor: Kgradintstartcolor,
@@ -252,7 +258,6 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate2 = picked;
                                   });
-                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate2[0], _pickedDate2[1]);
                                 }
                               },
                               child: Text(
@@ -277,15 +282,23 @@ class _StartYourTripState extends State<StartYourTrip> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(DateFormat.MMMd()
-                                            .format(_pickedDate2[0]), style: TextStyle(color: Colors.white),),
-                                    Text('  -  ', style: TextStyle(color: Colors.white)),
-                                    Text(DateFormat.MMMd()
-                                            .format(_pickedDate2[1]), style: TextStyle(color: Colors.white),),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate2[0]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text('  -  ',
+                                        style: TextStyle(color: Colors.white)),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate2[1]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Icon(Icons.calendar_today, color: Colors.white,),
+                                    Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.white,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -318,19 +331,17 @@ class _StartYourTripState extends State<StartYourTrip> {
                             )
                           ],
                         ),
-                  Divider(color: KSecondColor,),
+                  Divider(
+                    color: KSecondColor,
+                  ),
                   TextField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color:KSecondaryTextColor),
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
+                          borderSide: BorderSide(color: KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color:KSecondaryTextColor),
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
+                          borderSide: BorderSide(color: KSecondaryTextColor),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       labelText: "third step",
                       filled: true,
                       fillColor: Kgradintstartcolor,
@@ -347,12 +358,12 @@ class _StartYourTripState extends State<StartYourTrip> {
                                 color: KSecondaryTextColor,
                                 child: Center(
                                     child: Text(
-                                      'No Date Chosen',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                    )),
+                                  'No Date Chosen',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                )),
                               ),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -372,7 +383,6 @@ class _StartYourTripState extends State<StartYourTrip> {
                                   setState(() {
                                     _pickedDate3 = picked;
                                   });
-                                  Provider.of<CalPatient>(context, listen: false).addCalendar(_pickedDate3[0], _pickedDate3[1]);
                                 }
                               },
                               child: Text(
@@ -397,15 +407,25 @@ class _StartYourTripState extends State<StartYourTrip> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(DateFormat.MMMd()
-                                            .format(_pickedDate3[0]), style: TextStyle(color: Colors.white),),
-                                    Text('  -  ', style: TextStyle(color: Colors.white),),
-                                    Text(DateFormat.MMMd()
-                                            .format(_pickedDate3[1]), style: TextStyle(color: Colors.white),),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate3[0]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      '  -  ',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      DateFormat.MMMd().format(_pickedDate3[1]),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Icon(Icons.calendar_today, color: Colors.white,),
+                                    Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.white,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -442,29 +462,37 @@ class _StartYourTripState extends State<StartYourTrip> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                            alignment: Alignment.center,
-                            height: 50.0,
-                            width:  130,
-                            decoration: new BoxDecoration(
-                                borderRadius: BorderRadius.circular(80.0),
-                                color: KMainColor
-                            ),
-                            padding: const EdgeInsets.all(0),
-                            child: FlatButton(
-                              onPressed: () => Navigator.of(context).pushNamed('/patient-calendar'),
-                              child: FittedBox(
-                                child: Text(
-                                    'Create Calendar',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    )),
-
-                              ),
-                            ),
+                        alignment: Alignment.center,
+                        height: 50.0,
+                        width: 130,
+                        decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(80.0),
+                            color: KMainColor),
+                        padding: const EdgeInsets.all(0),
+                        child: FlatButton(
+                          onPressed: () {
+                            Provider.of<CalPatient>(context, listen: false).addCalendar(
+                              _pickedDate1[0],
+                              _pickedDate1[1],
+                              _pickedDate2[0],
+                              _pickedDate2[1],
+                              _pickedDate3[0],
+                              _pickedDate3[1],
+                            );
+                            Navigator.of(context)
+                                .pushNamed('/patient-calendar');
+                          },
+                          child: FittedBox(
+                            child: Text('Create Calendar',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                )),
                           ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
