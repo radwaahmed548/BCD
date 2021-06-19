@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/models/finalpost.dart';
 import 'package:gp/models/postdetails.dart';
+import 'package:provider/provider.dart';
 
 class  addpost extends StatefulWidget {
   const addpost({Key key}) : super(key: key);
@@ -35,10 +37,7 @@ class _addpostState extends State<addpost> {
   }
   void _saveform(){
     _form.currentState.save();
-    print(_editedpost.title);
-
-    print(_editedpost.imageUrl);
-    print(_editedpost.description);
+ Provider.of<Posts>(context,listen:false).addpost(_editedpost);
 
   }
   Widget build(BuildContext context) {

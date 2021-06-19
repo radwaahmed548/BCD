@@ -25,7 +25,7 @@ final String description;
         child: GridTile(
 
 header:Text(title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-         child: Image.network(imageUrl),
+       child: Text(id),
           footer: GridTileBar(
             backgroundColor: Colors.black38,
             subtitle:Text(description,textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontSize: 20),),
