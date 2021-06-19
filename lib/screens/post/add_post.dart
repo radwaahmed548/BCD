@@ -13,7 +13,7 @@ class _addpostState extends State<addpost> {
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
   final _form =GlobalKey<FormState>();
-  var _editedpost = Post(id: null, title: '', description: '', imageUrl: '', date: '');
+  var _editedpost = Post(id: null, title: '', description: '', imageUrl: '',);
 
   @override
   void initState(){
@@ -63,20 +63,20 @@ child:Form(
     children: <Widget>[
       SizedBox(height: 40,),
       TextFormField(
-        decoration: InputDecoration(labelText:'post' ),
+        decoration: InputDecoration(labelText:'title' ),
       textInputAction: TextInputAction.next,
         onSaved: (value){
           _editedpost = Post(
-              title: _editedpost.title,description: _editedpost.description,imageUrl: _editedpost.imageUrl,id: null);
+              title: value,description: _editedpost.description,imageUrl: _editedpost.imageUrl,id: null);
         },
       ),
       SizedBox(height: 40,),
       TextFormField(
-        decoration: InputDecoration(labelText:'post' ),
+        decoration: InputDecoration(labelText:'description' ),
         textInputAction: TextInputAction.next,
         onSaved: (value){
           _editedpost = Post(
-              title: _editedpost.title,description: _editedpost.description,imageUrl: _editedpost.imageUrl,id: null);
+              title: _editedpost.title,description: value,imageUrl: _editedpost.imageUrl,id: null);
         },
       ),
       SizedBox(height: 40,),
@@ -102,6 +102,10 @@ child:Form(
               controller: _imageUrlController,
               focusNode: _imageUrlFocusNode ,
   onFieldSubmitted: (_) =>{_saveform() },
+              onSaved: (value){
+                _editedpost = Post(
+                    title: _editedpost.title,description: _editedpost.description,imageUrl: value,id: null);
+              },
             ),
           ),
         ],

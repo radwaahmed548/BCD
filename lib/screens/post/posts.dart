@@ -10,7 +10,7 @@ class Postoverview extends StatelessWidget {
 final String description;
   final String imageUrl;
 
-  Postoverview(this.imageUrl,this.title,this.id,this.description);
+  Postoverview(this.id,this.title,this.description,this.imageUrl);
 
 
 
@@ -25,7 +25,7 @@ final String description;
         child: GridTile(
 
 header:Text(title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-         child: Image.network(imageUrl,),
+         child: Image.network(imageUrl),
           footer: GridTileBar(
             backgroundColor: Colors.black38,
             subtitle:Text(description,textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontSize: 20),),

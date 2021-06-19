@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gp/models/postdetails.dart';
+import 'package:gp/models/postdetails.dart';
+import 'package:http/http.dart';
 import '../login.dart';
 import '../register.dart';
 import 'package:gp/components/background.dart';
@@ -12,34 +17,16 @@ import '../../components/tools.dart';
 import 'add_post.dart';
 import 'posts.dart';
 import 'add_post.dart';
+import 'package:http/http.dart' as http;
+import 'package:gp/models/finalpost.dart' ;
+import 'package:gp/models/postdetails.dart';
 
 class Community extends StatelessWidget {
+  List <Post> postList = Posts.loadedpost;
 
-
-  final List<Post> loadedpost =[
-
-    Post(id: 'p1',
-        title: 'Caitlyn',
-        date: "Mon May 3 2021 17:24",
-        description: 'Together We Can ❤',
-        imageUrl: 'https://thumbs.dreamstime.com/z/support-breast-cancer-sufferers-pink-ribbon-quote-support-breast-cancer-sufferers-pink-ribbon-quote-146076145.jpg',
-    ),
-    Post(id: 'p2',
-        title: 'Jessy',
-        date: "Mon May 3 2021 19:24",
-        description: 'with cancer survivor',
-        imageUrl: 'https://thumbs.dreamstime.com/z/support-breast-cancer-sufferers-pink-ribbon-quote-support-breast-cancer-sufferers-pink-ribbon-quote-146076145.jpg',
-    ),
-    Post(id: 'p3',
-        title: 'emmy',
-        date: "Mon May 2 2021 19:24",
-        description: 'you are a fighter don not give up',
-       imageUrl:'https://thumbs.dreamstime.com/z/support-breast-cancer-sufferers-pink-ribbon-quote-support-breast-cancer-sufferers-pink-ribbon-quote-146076145.jpg',
-    ),
-
-  ];
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
@@ -52,12 +39,13 @@ class Community extends StatelessWidget {
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(10.0),
-        itemCount: loadedpost.length,
+        itemCount:postList.length,
+
         itemBuilder: (ctx,i) => Postoverview(
-            loadedpost[i].id,
-            loadedpost[i].title,
-            loadedpost[i].imageUrl,
-          loadedpost[i].description,
+          postList[i].id,
+            postList[i].title,
+            postList[i].imageUrl,
+          postList[i].description,
 
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -71,3 +59,6 @@ class Community extends StatelessWidget {
     );
   }
 }
+
+
+

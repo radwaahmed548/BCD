@@ -16,7 +16,7 @@ import 'screens/register.dart';
 import 'home/home.dart';
 import 'screens/post/Community.dart';
 
-
+import 'models/finalpost.dart';
 import 'screens/Stories.dart';
 import 'screens/profile.dart';
 import 'screens/HelpCenter.dart';
@@ -49,6 +49,12 @@ class MyApp extends StatelessWidget {
           update: (ctx, auth, prevData) => CalNormal(
             auth.token,
             auth.userID
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, Posts>(
+          update: (ctx, auth, prevData) => Posts(
+              auth.token,
+              auth.userID
           ),
         ),
       ],

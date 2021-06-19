@@ -15,7 +15,7 @@ class Post{
    @required this.title,
     @required  this.description,
     @required this.imageUrl,
-    @required this.date,
+     this.date,
     this.isFav
 });
 }
