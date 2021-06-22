@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 
-class Post{
+class Post with ChangeNotifier{
   final String id;
   final String title;
   final String date;

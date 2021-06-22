@@ -53,10 +53,13 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider<Auth, Posts>(
           update: (ctx, auth, prevData) => Posts(
+
               auth.token,
               auth.userID
           ),
         ),
+
+
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(

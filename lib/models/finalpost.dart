@@ -2,9 +2,10 @@ import 'package:gp/models/postdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'http_exception.dart';
 
  class Posts with ChangeNotifier {
-   static List <Post> loadedpost =[
+  static List <Post> loadedpost =[
 
   // Post(id: 'p1',
   //   title: 'Caitlyn',
@@ -28,11 +29,17 @@ import 'dart:convert';
 ];
 
 
+   List <Post> get loadedposts{
+     return [...loadedposts];
+   }
 
    final String authToken;
    final String userID;
-   Posts(this.authToken, this.userID);
+   Posts( this.authToken, this.userID);
 
+  Post findById(String id) {
+    return loadedpost.firstWhere((prod) => prod.id == id);
+  }
 
 Future<void> fetchAndsetpost () async {
   final url = Uri.parse(
@@ -56,8 +63,39 @@ Future<void> fetchAndsetpost () async {
   }
 
 }
+  Future <void> DeletePost(String id) async {
+    final url = Uri.parse(
+        'https://bcd-gp-default-rtdb.firebaseio.com/posts/$id.json?auth=$authToken');
+    final existingPostIndex = loadedpost.indexWhere((prod) => prod.id == id);
+    var existingPost = loadedpost[existingPostIndex];
+    loadedpost.removeAt(existingPostIndex);
+    notifyListeners();
+    final response = await http.delete(url);
+    if (response.statusCode >= 400) {
+      loadedpost.insert(existingPostIndex, existingPost);
+      notifyListeners();
+      throw HttpException('Could not delete product.');
+    }
+    existingPost = null;
+  }
+  Future<void> updatePost(String id, Post newPost) async {
+    final prodIndex = loadedpost.indexWhere((prod) => prod.id == id);
+    if (prodIndex >= 0) {
+      final url = Uri.parse(
+          'https://bcd-gp-default-rtdb.firebaseio.com/posts/$id.json?auth=$authToken');
+      await http.patch(url,
+          body: json.encode({
+            'title': newPost.title,
+            'description': newPost.description,
+            'imageUrl': newPost.imageUrl,
 
-
+          }));
+      loadedpost[prodIndex] = newPost;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
 Future <void> addpost(Post postt) async {
   final url = Uri.parse(
       'https://bcd-gp-default-rtdb.firebaseio.com/posts.json?auth=$authToken');

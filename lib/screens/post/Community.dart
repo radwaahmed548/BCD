@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:gp/models/postdetails.dart';
@@ -22,6 +22,7 @@ import 'add_post.dart';
 import 'package:http/http.dart' as http;
 import 'package:gp/models/finalpost.dart' ;
 import 'package:gp/models/postdetails.dart';
+import 'package:gp/components/maindrawer.dart';
 
 class Community extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _CommunityState extends State<Community> {
   var _isInit = true;
   var _isloading= false;
 
-  List <Post> postList = Posts.loadedpost;
+  List <Post> postList =Posts.loadedpost;
 
   @override
  void initState(){
@@ -66,20 +67,30 @@ _isInit=false;
         ],
 
       ),
-      body: GridView.builder(
+
+      body:_isloading ? Center( child: CircularProgressIndicator(),
+      )
+
+      :GridView.builder(
         padding: const EdgeInsets.all(10.0),
         itemCount:postList.length,
 
-        itemBuilder: (ctx,i) => Postoverview(
-          postList[i].id,
-            postList[i].title,
-            postList[i].imageUrl,
-          postList[i].description,
+        itemBuilder: (ctx,i) => ChangeNotifierProvider.value(
+          value:postList[i],
+          child: Postoverview(
+            postList[i].id,
+             postList[i].title,
+              postList[i].imageUrl,
+            postList[i].description,
 
+          ),
         ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,childAspectRatio: 2/1, mainAxisSpacing: 10
-        ),),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,crossAxisSpacing: 20
+        )),
+
+
+
       floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.pushNamed(context, '/addpost');
       },
