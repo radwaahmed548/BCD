@@ -125,14 +125,12 @@ class _addpostState extends State<addpost> {
       backgroundColor: KMainColor,
      title:const Text('add post'),
       actions: <Widget>[
-        GestureDetector(
-          child: IconButton(icon: const Icon(Icons.save),onPressed:() {
-            _saveForm();
+        IconButton(icon: const Icon(Icons.save),onPressed:() {
+          _saveForm();
          Navigator.pushNamed(context, '/Community');
 
 
-          }
-          ),
+        }
         )
       ],
     ),
@@ -144,6 +142,7 @@ child:Form(
     children: <Widget>[
       SizedBox(height: 40,),
       TextFormField(
+        initialValue: _initValues['title'],
         decoration: InputDecoration(labelText:'title' ),
       textInputAction: TextInputAction.next,
         onFieldSubmitted: (_) {
@@ -159,11 +158,12 @@ child:Form(
           _editedpost = Post(
               title: value,
               description: _editedpost.description,
-              imageUrl: _editedpost.imageUrl,id: null);
+              imageUrl: _editedpost.imageUrl,id: _editedpost.id);
         },
       ),
       SizedBox(height: 40,),
       TextFormField(
+        initialValue: _initValues['description'],
         decoration: InputDecoration(labelText:'description' ),
         textInputAction: TextInputAction.next,
         focusNode: _descriptionFocusNode,
@@ -178,7 +178,9 @@ child:Form(
         },
         onSaved: (value){
           _editedpost = Post(
-              title: _editedpost.title,description: value,imageUrl: _editedpost.imageUrl,id: null);
+              title: _editedpost.title,description: value,
+              imageUrl: _editedpost.imageUrl,
+              id: _editedpost.id);
         },
       ),
       SizedBox(height: 40,),
@@ -198,6 +200,7 @@ child:Form(
           ),
           Expanded(
             child: TextFormField(
+
               decoration: InputDecoration(labelText:'Image Url' ),
               keyboardType: TextInputType.url,
               textInputAction: TextInputAction.done,
@@ -206,7 +209,10 @@ child:Form(
   onFieldSubmitted: (_) =>{_saveForm() },
               onSaved: (value){
                 _editedpost = Post(
-                    title: _editedpost.title,description: _editedpost.description,imageUrl: value,id: null);
+                    title: _editedpost.title,
+                    description: _editedpost.description,
+                    imageUrl: value,
+                    id: _editedpost.id);
               },
             ),
           ),
