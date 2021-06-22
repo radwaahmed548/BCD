@@ -125,16 +125,20 @@ class _addpostState extends State<addpost> {
       backgroundColor: KMainColor,
      title:const Text('add post'),
       actions: <Widget>[
-        IconButton(icon: const Icon(Icons.save),onPressed:() {
-          _saveForm();
-         Navigator.pushNamed(context, '/Community');
+        GestureDetector(
+          child: IconButton(icon: const Icon(Icons.save),onPressed:() {
+            _saveForm();
+           Navigator.pushNamed(context, '/Community');
 
 
-        }
+          }
+          ),
         )
       ],
     ),
-body: Padding(padding: EdgeInsets.all(8),
+body:
+
+Padding(padding: EdgeInsets.all(8),
 child:Form(
   key:  _form,
 
@@ -167,6 +171,10 @@ child:Form(
         decoration: InputDecoration(labelText:'description' ),
         textInputAction: TextInputAction.next,
         focusNode: _descriptionFocusNode,
+        onFieldSubmitted: (_) {
+          FocusScope.of(context)
+              .requestFocus(_descriptionFocusNode);
+        },
         validator: (value) {
           if (value.isEmpty) {
             return 'Please enter a description.';
@@ -191,7 +199,7 @@ child:Form(
             height: 100,
             margin: EdgeInsets.only(top:8,right:10),
             decoration: BoxDecoration(border: Border.all(width:1,color: KMainColor)),
-        child:_imageUrlController.text.isEmpty ? 
+        child:_imageUrlController.text.isEmpty ?
             Text('enter the url') :
             FittedBox(child: Image.network(_imageUrlController.text,
             fit:BoxFit.cover
@@ -206,7 +214,23 @@ child:Form(
               textInputAction: TextInputAction.done,
               controller: _imageUrlController,
               focusNode: _imageUrlFocusNode ,
-  onFieldSubmitted: (_) =>{_saveForm() },
+  onFieldSubmitted: (_) {
+                _saveForm(); },
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter an image URL.';
+                }
+                if (!value.startsWith('http') &&
+                    !value.startsWith('https')) {
+                  return 'Please enter a valid URL.';
+                }
+                if (!value.endsWith('.png') &&
+                    !value.endsWith('.jpg') &&
+                    !value.endsWith('.jpeg')) {
+                  return 'Please enter a valid image URL.';
+                }
+                return null;
+              },
               onSaved: (value){
                 _editedpost = Post(
                     title: _editedpost.title,

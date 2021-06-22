@@ -32,6 +32,9 @@ class Community extends StatefulWidget {
 class _CommunityState extends State<Community> {
   var _isInit = true;
   var _isloading= false;
+  Future<void> _refreshPosts(BuildContext context) async {
+    await Provider.of<Posts>(context,listen: false).fetchAndsetpost();
+  }
 
   List <Post> postList =Posts.loadedpost;
 
@@ -68,26 +71,30 @@ _isInit=false;
 
       ),
 
-      body:_isloading ? Center( child: CircularProgressIndicator(),
-      )
+      body:
+      RefreshIndicator(
+        onRefresh: () => _refreshPosts(context),
+        child: _isloading ? Center( child: CircularProgressIndicator(),
+        )
 
-      :GridView.builder(
-        padding: const EdgeInsets.all(10.0),
-        itemCount:postList.length,
+        :GridView.builder(
+          padding: const EdgeInsets.all(10.0),
+          itemCount:postList.length,
 
-        itemBuilder: (ctx,i) => ChangeNotifierProvider.value(
-          value:postList[i],
-          child: Postoverview(
-            postList[i].id,
-             postList[i].title,
-              postList[i].imageUrl,
-            postList[i].description,
+          itemBuilder: (ctx,i) => ChangeNotifierProvider.value(
+            value:postList[i],
+            child: Postoverview(
+              postList[i].id,
+               postList[i].title,
+                postList[i].imageUrl,
+              postList[i].description,
 
+            ),
           ),
-        ),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,crossAxisSpacing: 20
-        )),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,crossAxisSpacing: 20
+          )),
+      ),
 
 
 
