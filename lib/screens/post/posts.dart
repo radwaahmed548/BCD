@@ -7,15 +7,15 @@ import 'package:gp/components/tools.dart';
 import 'package:provider/provider.dart';
 import 'package:gp/models/finalpost.dart';
 import 'add_post.dart';
-
+import 'package:gp/models/login_auth.dart';
 
 class Postoverview extends StatelessWidget {
-  final String id;
-  final String title;
-final String description;
-  final String imageUrl;
+ // final String id;
+  //final String title;
+//final String description;
+  //final String imageUrl;
 
-  Postoverview(this.id,this.title,this.description,this.imageUrl);
+  //Postoverview(this.id,this.title,this.description,this.imageUrl);
 
 
 
@@ -26,6 +26,7 @@ final String description;
     Size size = MediaQuery.of(context).size;
     final post = Provider.of<Post>(context, listen: false);
     final scaffold = Scaffold.of(context);
+    final authData = Provider.of<Auth>(context, listen: false);
 
     return Scaffold(
       body: Padding(
@@ -49,12 +50,22 @@ final String description;
 
                 ButtonBar(
                   children: [
-                    IconButton(icon: Icon(Icons.favorite), color: Theme.of(context).errorColor,),
+                    Consumer<Post>(
+                      builder: (ctx, post, _) => IconButton(
+                        icon: Icon(
+                          post.isFavorite ? Icons.favorite : Icons.favorite_border,
+                        ),
+                        color: Theme.of(context).errorColor,
+                        onPressed: () {
+                          post.toggleFavoriteStatus(authData.token,authData.userID,);
+                        },
+                      ),
+                    ),
                     IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {
 
-                        Navigator.pushNamed(context, '/addpost',arguments: id);
+                        Navigator.pushNamed(context, '/addpost',arguments:post.id);
                       },
                       color: Theme.of(context).errorColor,
                     ),
@@ -63,7 +74,7 @@ final String description;
                       onPressed: () async {
                         try {
                           await Provider.of<Posts>(context, listen: false).
-                          DeletePost(id);
+                          DeletePost(post.id);
                         } catch (error) {
                           scaffold.showSnackBar(
                             SnackBar(

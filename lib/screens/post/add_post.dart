@@ -162,7 +162,8 @@ child:Form(
           _editedpost = Post(
               title: value,
               description: _editedpost.description,
-              imageUrl: _editedpost.imageUrl,id: _editedpost.id);
+              imageUrl: _editedpost.imageUrl,id: _editedpost.id,
+          isFavorite: _editedpost.isFavorite);
         },
       ),
       SizedBox(height: 40,),
@@ -188,7 +189,8 @@ child:Form(
           _editedpost = Post(
               title: _editedpost.title,description: value,
               imageUrl: _editedpost.imageUrl,
-              id: _editedpost.id);
+              id: _editedpost.id,
+              isFavorite: _editedpost.isFavorite);
         },
       ),
       SizedBox(height: 40,),
@@ -236,7 +238,8 @@ child:Form(
                     title: _editedpost.title,
                     description: _editedpost.description,
                     imageUrl: value,
-                    id: _editedpost.id);
+                    id: _editedpost.id,
+                    isFavorite: _editedpost.isFavorite);
               },
             ),
           ),

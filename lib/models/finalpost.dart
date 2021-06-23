@@ -28,10 +28,16 @@ import 'http_exception.dart';
 
 ];
 
+  //List<Post> get favoriteItems {
+    //return loadedpost.where((prodItem) => prodItem.isFavorite).toList();
+  //}
 
    List <Post> get loadedposts{
      return [...loadedposts];
    }
+  List<Post> get favoriteItems {
+    return loadedpost.where((prodItem) => prodItem.isFavorite).toList();
+  }
 
    final String authToken;
    final String userID;
@@ -44,21 +50,32 @@ import 'http_exception.dart';
 Future<void> fetchAndsetpost () async {
   final url = Uri.parse(
       'https://bcd-gp-default-rtdb.firebaseio.com/posts.json?auth=$authToken');
+  final response = await http.get(url);
   try {
-    final response = await http.get(url);
-    final extracteddata=json.decode(response.body) as Map<String,dynamic>;
-    final List <Post> loadedposts =[];
-    extracteddata.forEach((postid, postdata) {
+    //final response = await http.get(url);
+    final extracteddata = json.decode(response.body) as Map<String, dynamic>;
+
+    if (extracteddata == null) {
+      return;
+    }
+    final url = Uri.parse(
+        'https://bcd-gp-default-rtdb.firebaseio.com/userFavorites/$userID.json?auth=$authToken');
+    final favoriteResponse = await http.get(url);
+    final favoriteData = json.decode(favoriteResponse.body);
+    final List <Post> loadedposts = [];
+    extracteddata.forEach((prodId, prodData) {
       loadedposts.add(Post(
-        id: postid,
-        title: postdata['title'],
-        description: postdata['description'],
-        imageUrl: postdata['imageUrl'],
+        id: prodId,
+        title: prodData['title'],
+        description: prodData['description'],
+        isFavorite:
+        favoriteData == null ? false : favoriteData[prodId] ?? false,
+        imageUrl: prodData['imageUrl'],
       ));
     });
     loadedpost = loadedposts;
-   notifyListeners();
-  } catch (error) {
+    notifyListeners();
+  }catch (error) {
     throw(error);
   }
 
@@ -89,6 +106,7 @@ Future<void> fetchAndsetpost () async {
             'description': newPost.description,
             'imageUrl': newPost.imageUrl,
 
+
           }));
       loadedpost[prodIndex] = newPost;
       notifyListeners();
@@ -106,24 +124,22 @@ Future <void> addpost(Post postt) async {
             {'title': postt.title,
               'description': postt.description,
               'imageUrl': postt.imageUrl,
-              'isfav': postt.isFav,
+
             }
         ));
+    final newpost=Post(
+        id: json.decode(response.body)['name'],
+        title: postt.title,
+        description: postt.description,
+        imageUrl: postt.imageUrl);
+
+    loadedpost.add(newpost);
     notifyListeners();
+
   } catch(e) {
     throw(e);
   }
 
 
-
-
-  final newpost=Post(
-      id: DateTime.now().toString(),
-      title: postt.title,
-      description: postt.description,
-      imageUrl: postt.imageUrl);
-
-  loadedpost.add(newpost);
-  notifyListeners();
 }
 }

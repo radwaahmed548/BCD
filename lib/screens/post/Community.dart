@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gp/models/postdetails.dart';
 import 'package:gp/models/postdetails.dart';
+import 'package:gp/screens/post/postgrid.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import '../login.dart';
@@ -23,20 +24,36 @@ import 'package:http/http.dart' as http;
 import 'package:gp/models/finalpost.dart' ;
 import 'package:gp/models/postdetails.dart';
 import 'package:gp/components/maindrawer.dart';
+import 'postgrid.dart';
+
+
+
+
+enum FilterOptions {
+  Favorites,
+  All,
+}
 
 class Community extends StatefulWidget {
   @override
   _CommunityState createState() => _CommunityState();
+
+
 }
 
 class _CommunityState extends State<Community> {
   var _isInit = true;
   var _isloading= false;
+  var _showOnlyFavorites = false;
+
+
+
+
   Future<void> _refreshPosts(BuildContext context) async {
     await Provider.of<Posts>(context,listen: false).fetchAndsetpost();
   }
 
-  List <Post> postList =Posts.loadedpost;
+ // List <Post> postList =Posts.loadedpost;
 
   @override
  void initState(){
@@ -59,14 +76,39 @@ _isInit=false;
     super.didChangeDependencies();
   }
   Widget build(BuildContext context) {
- final postdata = Provider.of<Posts>(context);
+
+
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
         backgroundColor: KMainColor,
         title: Text("NewsFeed"),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: (){}  ),
+          PopupMenuButton(
+            onSelected: (FilterOptions selectedValue) {
+              setState(() {
+                if (selectedValue == FilterOptions.Favorites) {
+                  _showOnlyFavorites = true;
+                } else {
+                  _showOnlyFavorites = false;
+                }
+              });
+            },
+            icon: Icon(
+              Icons.more_vert,
+            ),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Text('Only Favorites'),
+                value: FilterOptions.Favorites,
+              ),
+              PopupMenuItem(
+                child: Text('Show All'),
+                value: FilterOptions.All,
+              ),
+            ],
+          ),
+
         ],
 
       ),
@@ -77,23 +119,7 @@ _isInit=false;
         child: _isloading ? Center( child: CircularProgressIndicator(),
         )
 
-        :GridView.builder(
-          padding: const EdgeInsets.all(10.0),
-          itemCount:postList.length,
-
-          itemBuilder: (ctx,i) => ChangeNotifierProvider.value(
-            value:postList[i],
-            child: Postoverview(
-              postList[i].id,
-               postList[i].title,
-                postList[i].imageUrl,
-              postList[i].description,
-
-            ),
-          ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,crossAxisSpacing: 20
-          )),
+        :postgrid(_showOnlyFavorites),
       ),
 
 
