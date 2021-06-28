@@ -14,13 +14,15 @@ import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
 import 'home/home.dart';
-import 'screens/Community.dart';
-import 'screens/SavedPosts.dart';
+import 'screens/post/Community.dart';
+
+import 'models/finalpost.dart';
 import 'screens/Stories.dart';
 import 'screens/profile.dart';
 import 'screens/HelpCenter.dart';
 import 'models/login_auth.dart';
 import 'screens/SplashScreen.dart';
+import 'package:gp/screens/post/add_post.dart';
 
 void main() {
   runApp(MyApp());
@@ -49,6 +51,15 @@ class MyApp extends StatelessWidget {
             auth.userID
           ),
         ),
+        ChangeNotifierProxyProvider<Auth, Posts>(
+          update: (ctx, auth, prevData) => Posts(
+
+              auth.token,
+              auth.userID
+          ),
+        ),
+
+
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
@@ -82,10 +93,11 @@ class MyApp extends StatelessWidget {
             '/result1': (context) => ResultTrue(),
             '/result2': (context) => ResultFalse(),
             '/Community': (context) => Community(),
-            '/SavedPosts': (context) => SavedPosts(),
+            '/addpost' :(context) => addpost(),
             '/Stories': (context) => Stories(),
             '/profile': (context) => ProfileScreen(),
             '/helpcenter': (context) => HelpCenter(),
+            '/addpostscreen' :(context) => addpost(),
           },
         ),
       ),
