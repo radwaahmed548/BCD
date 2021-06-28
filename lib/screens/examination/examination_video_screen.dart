@@ -15,13 +15,10 @@ class _MyAppState extends State<ExaminationScreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   VideoPlayerController _controller;
   ChewieController _chewieController;
-  //Future<void> _initializeVideoPlayer;
+
   @override
   void initState() {
-    // _controller = VideoPlayerController.asset('videos/bc_exam.mp4');
-    // _initializeVideoPlayer= _controller.initialize();
-    // _controller.setLooping(true);
-    // _controller.setVolume(1.0);
+
 
     _chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.asset('videos/bc_exam.mp4'),

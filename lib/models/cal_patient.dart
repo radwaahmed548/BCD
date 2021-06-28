@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CalendarData {
   String id;
@@ -24,6 +25,7 @@ class CalendarData {
 }
 
 class CalPatient with ChangeNotifier {
+  String _dateID;
 
   List<CalendarData> _currentDate = [];
 
@@ -35,6 +37,10 @@ class CalPatient with ChangeNotifier {
   final String userID;
 
   CalPatient(this.authToken, this.userID);
+
+  String get dateID {
+    return _dateID;
+  }
 
   Future<void> addCalendar(
     DateTime firstStepStartDate,
@@ -59,7 +65,26 @@ class CalPatient with ChangeNotifier {
           'patientID': userID,
         }),
       );
+      final newDate = CalendarData(
+        id: json.decode(response.body)['name'],
+        firstStepStartDate: firstStepStartDate,
+        firstStepEndDate: firstStepEndDate,
+        secondStepStartDate: secondStepStartDate,
+        secondStepEndDate: secondStepEndDate,
+        thirdStepStartDate: thirdStepStartDate,
+        thirdStepEndDate: thirdStepEndDate,
+      );
+      _dateID = json.decode(response.body)['name'];
+      //print(_dateID);
+      _currentDate.add(newDate);
       notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final dateData2 = json.encode(
+        {
+          'dateId': _dateID,
+        },
+      );
+      prefs.setString('dateId', dateData2);
     } catch (e) {
       throw (e);
     }
@@ -84,10 +109,40 @@ class CalPatient with ChangeNotifier {
           thirdStepEndDate: DateTime.parse(date['thirdStep-endDate']),
         ));
       });
+      final prefs = await SharedPreferences.getInstance();
+      if (!prefs.containsKey('dateId')) {
+        return false;
+      }
+      final extractedUserData = json.decode(prefs.getString('dateId')) as Map<String, Object>;
+
+      _dateID = extractedUserData['dateId'];
+      print(_dateID);
       _currentDate = loadedData;
       notifyListeners();
     } catch (e) {
       throw (e);
     }
   }
+
+  Future<void> updateDate(String id, CalendarData newDate) async {
+    final dateIndex = _currentDate.indexWhere((element) => element.id == id);
+    final url = Uri.parse(
+        'https://bcd-gp-default-rtdb.firebaseio.com/patient-calendar/$id.json?auth=$authToken');
+    try {
+      final response = await http.patch(url, body: json.encode({
+        'firstStep-startDate': newDate.firstStepStartDate.toIso8601String(),
+        'firstStep-endDate': newDate.firstStepEndDate.toIso8601String(),
+        'secondStep-startDate': newDate.secondStepStartDate.toIso8601String(),
+        'secondStep-endDate': newDate.secondStepEndDate.toIso8601String(),
+        'thirdStep-startDate': newDate.thirdStepStartDate.toIso8601String(),
+        'thirdStep-endDate': newDate.thirdStepEndDate.toIso8601String(),
+        'patientID': userID,
+      }));
+      _currentDate[dateIndex] = newDate;
+      notifyListeners();
+    } catch(e) {
+      throw(e);
+    }
+  }
 }
+

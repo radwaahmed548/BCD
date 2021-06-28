@@ -2,16 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/background.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/components/tools.dart';
+import 'package:gp/models/cal_patient.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/start_your_trip.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../components/tools.dart';
 import '../components/tools.dart';
 
-class CalendarPatient extends StatelessWidget {
+class CalendarPatient extends StatefulWidget {
+  @override
+  _CalendarPatientState createState() => _CalendarPatientState();
+}
+
+class _CalendarPatientState extends State<CalendarPatient> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey<ScaffoldState>();
+
   CalendarController _controller = CalendarController();
+
+  @override
+  void didChangeDependencies() {
+    //Provider.of<CalPatient>(context).fetchDate();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
