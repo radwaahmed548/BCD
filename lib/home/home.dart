@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gp/machine%20learning%20model/data_model.dart';
+import 'package:provider/provider.dart';
 import '../screens/login.dart';
 import '../screens/register.dart';
 import 'package:gp/components/background.dart';
@@ -15,9 +17,29 @@ class homescreen extends StatefulWidget {
   _homescreenState createState() => _homescreenState();
 }
 
+
+
 class _homescreenState extends State<homescreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  bool _isInit = true;
+  bool _isLoading;
 
+  @override
+  void didChangeDependencies() {
+    if(_isInit)
+      {
+        setState(() {
+          _isLoading = true;
+        });
+        Provider.of<DataModel>(context, listen: false).mlDataModel().then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,7 +57,7 @@ class _homescreenState extends State<homescreen> {
                 stops: [0.2, 0.7]),
         ),
         child: SafeArea(
-          child: Stack(
+          child: _isLoading ? Center(child: CircularProgressIndicator(),) : Stack(
             children: [
               Positioned
                 (top: 30,

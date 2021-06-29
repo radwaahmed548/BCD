@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gp/machine%20learning%20model/Result2.dart';
+import 'package:gp/machine%20learning%20model/data_model.dart';
 import 'package:gp/models/cal_normal.dart';
 import 'package:gp/models/cal_patient.dart';
 import 'package:gp/models/login_auth.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/screens/start_your_trip.dart';
+import 'package:ml_dataframe/ml_dataframe.dart';
 import 'package:provider/provider.dart';
 import 'screens/examination/examination_video_screen.dart';
 import 'package:gp/machine learning model/Questions.dart';
@@ -37,6 +40,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
+        ChangeNotifierProvider.value(
+          value: DataModel(),
+        ),
         // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, CalPatient>(
           update: (ctx, auth, prevData) => CalPatient(
@@ -51,9 +57,9 @@ class MyApp extends StatelessWidget {
             auth.userID
           ),
         ),
+        // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, Posts>(
           update: (ctx, auth, prevData) => Posts(
-
               auth.token,
               auth.userID
           ),
