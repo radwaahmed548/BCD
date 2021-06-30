@@ -7,6 +7,7 @@ import 'package:gp/models/cal_patient.dart';
 import 'package:gp/models/login_auth.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
+import 'models/userData.dart';
 import 'package:gp/screens/start_your_trip.dart';
 import 'package:ml_dataframe/ml_dataframe.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,12 @@ class MyApp extends StatelessWidget {
         // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, Posts>(
           update: (ctx, auth, prevData) => Posts(
+              auth.token,
+              auth.userID
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, Users>(
+          update: (ctx, auth, prevData) => Users(
               auth.token,
               auth.userID
           ),
