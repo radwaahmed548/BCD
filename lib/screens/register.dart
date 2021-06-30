@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'package:gp/components/background.dart';
+import 'package:gp/models/userData.dart';
 import 'package:provider/provider.dart';
 import '../models/login_auth.dart';
 
@@ -17,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Map<String, String> _authData = {
     'email': '',
     'password': '',
+    'userName': '',
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
@@ -30,15 +32,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _isLoading = true;
     });
     {
-      await Provider.of<Auth>(context, listen: false).signup(
+      var user = userData(email: _authData['email'], userName: _authData['userName']);
+      Provider.of<Users>(context, listen: false).addUser(user);
+      await Provider.of<Auth>(context, listen: false).signUp(
         _authData['email'],
         _authData['password'],
-      );
+        _authData['userName'],
+      ).then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
-    setState(() {
-      _isLoading = false;
-    });
+
   }
+
+  //var user = userData(email: _authData['email'], userName: null);
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -90,8 +99,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 SizedBox(height: size.height * 0.03),
-                TextField(
+                TextFormField(
                   decoration: InputDecoration(labelText: "Username"),
+                  validator: (value) {
+                    if (value.isEmpty)
+                      {
+                        return 'Enter Username!!';
+                      }
+                  },
+                  onSaved: (value) {
+                    _authData['userName'] = value;
+                  },
                 ),
                 SizedBox(height: size.height * 0.03),
                 TextFormField(
@@ -116,6 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             EdgeInsets.symmetric(vertical: 10),
                         child: RaisedButton(
                           onPressed: () {
+                            print(_authData['email']);
                             submit();
                             Navigator.pushNamed(context, '/home');
                           },

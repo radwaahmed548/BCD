@@ -8,6 +8,8 @@ import 'package:gp/components/maindrawer.dart';
 import '../components/tools.dart';
 // ignore: unused_import
 import 'package:gp/screens/calendar_screen.dart';
+import 'package:gp/models/login_auth.dart';
+import 'package:provider/provider.dart';
 
 const kSpacingUnit = 10;
 const kDarkPrimaryColor = Color(0xFF212121);
@@ -154,7 +156,10 @@ class ProfileScreen extends StatelessWidget {
                   text: 'Favorite Posts',
                 ),
                 GestureDetector(
-                  onTap:(){ Navigator.pushNamed(context,  '/');},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Provider.of<Auth>(context, listen: false).logout();
+                  },
                   child: ProfileListItem(
                     icon: LineAwesomeIcons.alternate_sign_out,
                     text: 'Logout',

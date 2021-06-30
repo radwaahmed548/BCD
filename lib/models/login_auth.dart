@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,9 +11,14 @@ class Auth with ChangeNotifier{
   DateTime _expiretime;
   String _userID;
   Timer _authTimer;
+  String _userName;
 
   bool get isAuth {
     return token != null;
+  }
+
+  String get userName {
+    return _userName;
   }
 
   String get token {
@@ -30,10 +34,10 @@ class Auth with ChangeNotifier{
     return _userID;
   }
 
-  Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
+  Future<void> signUp(
+      String email, String password, String userName) async {
     final url =
-        Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyCKqvgNHItjpsHYuj-iuyKKdsid5XQ0iCw');
+        Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCKqvgNHItjpsHYuj-iuyKKdsid5XQ0iCw');
     try {
       final response = await http.post(
         url,
@@ -41,6 +45,7 @@ class Auth with ChangeNotifier{
           {
             'email': email,
             'password': password,
+            'displayName': userName,
             'returnSecureToken': true,
           },
         ),
@@ -49,6 +54,7 @@ class Auth with ChangeNotifier{
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
+      print(responseData);
       _token = responseData['idToken'];
       _userID = responseData['localId'];
       _expiretime = DateTime.now().add(
@@ -74,12 +80,52 @@ class Auth with ChangeNotifier{
     }
   }
 
-  Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, 'signUp');
-  }
+  // Future<void> signup(String email, String password, String userName) async {
+  //   return _authenticate(email, password, 'signUp', userName);
+  // }
 
   Future<void> login(String email, String password) async {
-    return _authenticate(email, password, 'signInWithPassword');
+    final url =
+    Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCKqvgNHItjpsHYuj-iuyKKdsid5XQ0iCw');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(
+          {
+            'email': email,
+            'password': password,
+            'returnSecureToken': true,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+      _token = responseData['idToken'];
+      _userID = responseData['localId'];
+
+      _expiretime = DateTime.now().add(
+        Duration(
+          seconds: int.parse(
+            responseData['expiresIn'],
+          ),
+        ),
+      );
+      _autoLogout();
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'userId': _userID,
+          'expiryDate': _expiretime.toIso8601String(),
+        },
+      );
+      prefs.setString('userData', userData);
+    } catch (error) {
+      throw error;
+    }
   }
 
 
@@ -94,6 +140,7 @@ class Auth with ChangeNotifier{
     if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
+    print(extractedUserData);
     _token = extractedUserData['token'];
     _userID = extractedUserData['userId'];
     _expiretime = expiryDate;
@@ -124,4 +171,16 @@ class Auth with ChangeNotifier{
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 
+  Future<void> getUserData() async{
+    final url =
+    Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCKqvgNHItjpsHYuj-iuyKKdsid5XQ0iCw');
+    final response = await http.post(url,
+    body:{
+    "idToken": _token,
+    }
+    );
+    print(response.body);
+    _userName = json.decode(response.body)['users']['displayName'];
+    print(_userName);
+  }
 }
