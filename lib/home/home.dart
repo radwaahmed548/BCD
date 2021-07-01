@@ -84,7 +84,7 @@ class _homescreenState extends State<homescreen> {
                   ),
                   Container(
                       height: size.height * 0.80,
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10, bottom:10),
 
                     child: Swiper(
                       itemCount: 2,

@@ -5,11 +5,15 @@ import 'package:gp/machine%20learning%20model/data_model.dart';
 import 'package:gp/models/cal_normal.dart';
 import 'package:gp/models/cal_patient.dart';
 import 'package:gp/models/login_auth.dart';
+import 'package:gp/screens/SupportTicket.dart';
+import 'package:gp/screens/calendar_patient.dart';
+import 'screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_patient.dart';
 import 'package:gp/screens/calendar_screen.dart';
 import 'models/userData.dart';
 import 'package:gp/screens/start_your_trip.dart';
 import 'package:ml_dataframe/ml_dataframe.dart';
+import 'package:gp/screens/EditProfilePage.dart';
 import 'package:provider/provider.dart';
 import 'screens/examination/examination_video_screen.dart';
 import 'package:gp/machine learning model/Questions.dart';
@@ -19,7 +23,7 @@ import 'screens/login.dart';
 import 'screens/register.dart';
 import 'home/home.dart';
 import 'screens/post/Community.dart';
-
+import 'screens/EditProfilePage.dart';
 import 'models/finalpost.dart';
 import 'screens/Stories.dart';
 import 'screens/profile.dart';
@@ -44,6 +48,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: DataModel(),
         ),
+        ChangeNotifierProvider.value(
+          value:SupportTicket(),
+        ),
         // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, CalPatient>(
           update: (ctx, auth, prevData) => CalPatient(
@@ -65,6 +72,7 @@ class MyApp extends StatelessWidget {
               auth.userID
           ),
         ),
+
         ChangeNotifierProxyProvider<Auth, Users>(
           update: (ctx, auth, prevData) => Users(
               auth.token,
@@ -111,6 +119,8 @@ class MyApp extends StatelessWidget {
             '/profile': (context) => ProfileScreen(),
             '/helpcenter': (context) => HelpCenter(),
             '/addpostscreen' :(context) => addpost(),
+            '/editprofile':(context) => EditProfilePage(),
+            '/patientcalender':(context) => CalendarPatient(),
           },
         ),
       ),

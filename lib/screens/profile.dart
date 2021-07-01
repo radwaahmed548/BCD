@@ -3,13 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:gp/screens/profile_list_items.dart';
 import 'package:gp/components/tools.dart';
+
 // ignore: unused_import
 import 'package:gp/components/maindrawer.dart';
 import '../components/tools.dart';
+
 // ignore: unused_import
 import 'package:gp/screens/calendar_screen.dart';
 import 'package:gp/models/login_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:gp/screens/post/Community.dart';
 
 const kSpacingUnit = 10;
 const kDarkPrimaryColor = Color(0xFF212121);
@@ -60,15 +63,6 @@ class ProfileScreen extends StatelessWidget {
                       color: Theme.of(context).accentColor,
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
-                      heightFactor: kSpacingUnit.w * 1.5,
-                      widthFactor: kSpacingUnit.w * 1.5,
-                      child: Icon(
-                        LineAwesomeIcons.pen,
-                        color:Kgradintstartcolor,
-                        size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
-                      ),
-                    ),
                   ),
                 ),
               ],
@@ -85,20 +79,6 @@ class ProfileScreen extends StatelessWidget {
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),
-          Container(
-            height: kSpacingUnit.w * 4,
-            width: kSpacingUnit.w * 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-              color: KMainColor,
-            ),
-            child: Center(
-              child: Text(
-                'Upgrade to PRO',
-                style: kButtonTextStyle,
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -133,27 +113,41 @@ class ProfileScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: <Widget>[
-                ProfileListItem(
-                  icon: LineAwesomeIcons.ribbon,
-                  text: 'My Profile',
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/editprofile');
+                  },
+                  child: ProfileListItem(
+                    icon: LineAwesomeIcons.ribbon,
+                    text: 'My Profile',
+                  ),
                 ),
                 GestureDetector(
-                  onTap:(){ Navigator.pushNamed(context, '/calendar');},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/calendar');
+                  },
                   child: ProfileListItem(
                     icon: LineAwesomeIcons.calendar,
                     text: 'My Calender',
                   ),
                 ),
-                GestureDetector
-                  ( onTap:(){ Navigator.pushNamed(context,  '/Community');},
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/patientcalender');
+                  },
                   child: ProfileListItem(
-                    icon: LineAwesomeIcons.handshake,
-                    text: 'Community',
+                    icon: LineAwesomeIcons.alternate_list_1,
+                    text: 'Appointments Calender',
                   ),
                 ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.bookmark,
-                  text: 'Favorite Posts',
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Community');
+                  },
+                  child: ProfileListItem(
+                    icon: LineAwesomeIcons.handshake,
+                    text: 'Community Posts',
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {

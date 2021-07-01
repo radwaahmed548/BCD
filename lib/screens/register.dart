@@ -4,7 +4,6 @@ import 'package:gp/components/background.dart';
 import 'package:gp/models/userData.dart';
 import 'package:provider/provider.dart';
 import '../models/login_auth.dart';
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key key}) : super(key: key);
 
@@ -136,6 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {
                             print(_authData['email']);
                             submit();
+
                             Navigator.pushNamed(context, '/home');
                           },
                           shape: RoundedRectangleBorder(

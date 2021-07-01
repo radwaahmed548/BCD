@@ -1,270 +1,231 @@
 import 'package:flutter/material.dart';
+
 // ignore: unused_import
 import 'package:gp/components/tools.dart';
+
 // ignore: unused_import
 import 'package:gp/components/maindrawer.dart';
+
 // ignore: unused_import
 import 'package:gp/main.dart';
+import 'package:provider/provider.dart';
+import 'package:gp/screens/SupportTicket.dart';
 
 class HelpCenter extends StatefulWidget {
+  const HelpCenter({Key key}) : super(key: key);
   @override
   _HelpCenterState createState() => _HelpCenterState();
 }
 
 class _HelpCenterState extends State<HelpCenter> {
-  List<bool> isTypeSelected = [false, false, false, true, true];
+
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey<ScaffoldState>();
+  final _nameFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
+  final _descriptionFocusNode = FocusNode();
+  final _form = GlobalKey<FormState>();
+  var _editedTicket =
+      SupportTicket(id: '', name: '', email: '', description: '');
+
+  var _initValues = {
+    'name': '',
+    'email': '',
+    'description': '',
+  };
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      final TicketId = ModalRoute.of(context).settings.arguments as String;
+      if (TicketId != null) {
+        _editedTicket =
+            Provider.of<SupportTicket>(context, listen: false)
+            .findById(TicketId);
+        _initValues = {
+          'name': _editedTicket.name,
+          'email': _editedTicket.email,
+          'description': _editedTicket.description,
+        };
+      }
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _nameFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _descriptionFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  Future<void> _saveForm() async {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
+    _form.currentState.save();
+    setState(() {
+      _isLoading = true;
+    });
+    if (_editedTicket.id != null) {
+      await Provider.of<SupportTicket>(context, listen: false)
+          .updateTicket(_editedTicket.id, _editedTicket);
+    } else {
+      try {
+        await Provider.of<SupportTicket>(context, listen: false)
+            .addTicket(_editedTicket);
+      } catch (error) {
+        await showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('An error occurred!'),
+            content: Text('Something went wrong.'),
+            actions: <Widget>[
+              // ignore: deprecated_member_use
+              FlatButton(
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          ),
+        );
+      }
+      // finally {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   Navigator.of(context).pop();
+      // }
+    }
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    GlobalKey<FormState> formkey;
     return Scaffold(
       backgroundColor: Kgradintstartcolor,
       key: _drawerKey,
       drawer: MainDrawer(),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20, top: 40, right: 16, bottom: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Positioned(
+      appBar: AppBar(
+        backgroundColor: KMainColor,
+        title: Text("Help Center"),
+        actions: <Widget>[
+          GestureDetector(
+            child: IconButton(
+                icon: const Icon(Icons.save),
+                onPressed: () {
+                  _saveForm();
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Profile Edited Successfully!'),
+                    ),
+                  );
 
-              child: IconButton(
-                onPressed: () => _drawerKey.currentState.openDrawer(),
-                icon: Icon(
-                  Icons.menu,
-                  color: KMainColor,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top:10.0),
-              child: Text(
-                "Please select the type of the feedback Or Enter other Problems",
-                style: TextStyle(
-                  color: KprimaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            SizedBox(height: 10.0),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Login trouble", isSelected: isTypeSelected[0]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[0] = !isTypeSelected[0];
-                });
-              },
-            ),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Calender related", isSelected: isTypeSelected[1]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[1] = !isTypeSelected[1];
-                });
-              },
-            ),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Personal profile", isSelected: isTypeSelected[2]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[2] = !isTypeSelected[2];
-                });
-              },
-            ),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Other issues", isSelected: isTypeSelected[3]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[3] = !isTypeSelected[3];
-                });
-              },
-            ),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Suggestions", isSelected: isTypeSelected[4]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[4] = !isTypeSelected[4];
-                });
-              },
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            emailFeedbackForm(),
-            SizedBox(height: 5.0),
-            buildFeedbackForm(),
-            SizedBox(height: 20.0),
-            Spacer(),
-            Row(
-              children: [
-                // ignore: deprecated_member_use
-                Padding(
-                  padding: const EdgeInsets.only(bottom:150.0,left: 100),
-                  child: RaisedButton(onPressed: () {
-                    Navigator.pushNamed(context, '/calendar');
-                  },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                    textColor: Colors.white,
-                    padding: const EdgeInsets.all(0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50.0,
-                      width: 130,
-
-                      decoration: new BoxDecoration(
-                          borderRadius: BorderRadius.circular(80.0),
-                          color: KMainColor
-                      ),
-                      padding: const EdgeInsets.all(0),
-                      child: Text(
-                        'Submit',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          //fontFamily: 'A',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  buildFeedbackForm() {
-    return Container(
-      height: 150,
-      child: Stack(
-        children: [
-          TextField(
-            maxLines: 10,
-            decoration: InputDecoration(
-              hintText:
-              "Please briefly describe your question or the issue you're facing",
-              hintStyle: TextStyle(
-                fontSize: 13.0,
-                color: KprimaryTextColor,
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: KSecondaryTextColor,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: 1.0,
-                    color: Color(0xFFA6A6A6),
-                  ),
-                ),
-              ),
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFE5E5E5),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.add,
-                        color: Color(0xFFA5A5A5),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    "Upload screenshot (optional)",
-                    style: TextStyle(
-                      color: KprimaryTextColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                }),
           )
         ],
       ),
-    );
-  }
-
-  Widget buildCheckItem({String title, bool isSelected}) {
-    return Container(
-      padding: const EdgeInsets.all(6.0),
-      child: Row(
-        children: [
-          Icon(
-            isSelected ? Icons.check_circle : Icons.circle,
-            color: isSelected ? KMainColor : Colors.grey,
-          ),
-          SizedBox(width: 10.0),
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: isSelected ? KMainColor : Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-emailFeedbackForm() {
-  return Container(
-    height: 50,
-    child: Stack(
-      children: [
-        TextField(
-          maxLines: 10,
-          decoration: InputDecoration(
-            hintText: "Please enter your e-mail",
-            hintStyle: TextStyle(
-              fontSize: 13.0,
-              color: KprimaryTextColor,
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: KSecondaryTextColor,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _form,
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 40,
               ),
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  width: 1.0,
-                  color: KSecondaryTextColor,
+              TextFormField(
+                initialValue: _initValues['name'],
+                decoration: InputDecoration(labelText: 'Enter Your Name'),
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_emailFocusNode);
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please provide a Name.';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _editedTicket = SupportTicket(
+                      name: value,
+                      email: _editedTicket.email,
+                      description: _editedTicket.description,
+                      id: _editedTicket.id);
+                },
+              ),
+              SizedBox(height: 10.0),
+              TextFormField(
+                initialValue: _initValues['email'],
+                decoration: InputDecoration(
+                  labelText: "Please Enter Your E-mail",
                 ),
+                textInputAction: TextInputAction.next,
+                focusNode: _emailFocusNode,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_descriptionFocusNode);
+                },
+                validator: (value) {
+                  if (value.isEmpty || !value.contains('@')) {
+                    return 'Invalid email!';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _editedTicket = SupportTicket(
+                      name: _editedTicket.name,
+                      email: (value),
+                      description: _editedTicket.description,
+                      id: _editedTicket.id);
+                },
               ),
-            ),
-            padding: EdgeInsets.all(8.0),
+              SizedBox(height: 10.0),
+              TextFormField(
+                initialValue: _initValues['description'],
+                decoration: InputDecoration(
+                  labelText:
+                      "Please briefly describe your question or the issue you're facing",
+                ),
+                maxLines: 3,
+                keyboardType: TextInputType.multiline,
+                focusNode: _descriptionFocusNode,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a description.';
+                  }
+                  if (value.length < 10) {
+                    return 'Should be at least 10 characters long.';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _editedTicket = SupportTicket(
+                    name: _editedTicket.name,
+                    email: _editedTicket.email,
+                    description: value,
+                    id: _editedTicket.id,
+                  );
+                },
+              ),
+
+            ],
           ),
         )
-      ],
-    ),
-  );
+      )
+    );
+  }
 }
