@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gp/machine%20learning%20model/data_model.dart';
+import 'package:gp/models/login_auth.dart';
+
 import 'package:provider/provider.dart';
 import '../screens/login.dart';
 import '../screens/register.dart';
@@ -25,24 +26,26 @@ class _homescreenState extends State<homescreen> {
   bool _isLoading;
 
   @override
-  void didChangeDependencies() {
-    if(_isInit)
-      {
+  void didChangeDependencies() async {
+    if(_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      await Provider.of<Auth>(context, listen: false).getUserData().then((_) {
         setState(() {
-          _isLoading = true;
+          _isLoading = false;
         });
-        Provider.of<DataModel>(context, listen: false).mlDataModel().then((_) {
-          setState(() {
-            _isLoading = false;
-          });
-        });
-      }
+      });
+    }
     _isInit = false;
+
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       key: _scaffoldkey,
       drawer: MainDrawer(),
@@ -57,7 +60,7 @@ class _homescreenState extends State<homescreen> {
                 stops: [0.2, 0.7]),
         ),
         child: SafeArea(
-          child: _isLoading ? Center(child: CircularProgressIndicator(),) : Stack(
+          child: Stack(
             children: [
               Positioned
                 (top: 30,
@@ -143,6 +146,7 @@ class _homescreenState extends State<homescreen> {
                                             children: <Widget>[
                                               GestureDetector(
                                                 onTap: (){
+                                                  //print(widget.user);
                                                   Navigator.pushNamed(context, menue[index].action);
                                                 }
                                                 ,child: Text(

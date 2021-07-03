@@ -98,7 +98,7 @@ class _CalendarPatientState extends State<CalendarPatient> {
                         //   title: "Calender Updated",
                         //   description: "In 30 days We are Going to Inform You",
                         // ));
-                        Navigator.of(context).pushNamed(StartYourTrip.routeName);
+                        Navigator.of(context).pushReplacementNamed('/home');
 
                       },
                       child: FittedBox(

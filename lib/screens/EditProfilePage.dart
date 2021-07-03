@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'package:gp/components/maindrawer.dart';
 import 'package:gp/main.dart';
+import 'package:gp/models/login_auth.dart';
+import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -11,9 +13,13 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey<ScaffoldState>();
   bool showPassword = false;
+  Map<String, String> uData = {
+    'userName': '',
+  };
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Kgradintstartcolor,
       key: _drawerKey,
@@ -84,8 +90,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", "Dor Alex", false),
-              buildTextField("E-mail", "alexd@gmail.com", false),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 35.0),
+            child: TextField(
+              onSubmitted: (value) {
+                uData['userName'] = value;
+              },
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(bottom: 3),
+                  labelText: 'Full Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  hintText: Provider.of<Auth>(context).userName,
+
+                  hintStyle: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  )),
+            ),
+          ),
+              buildTextField("E-mail", Provider.of<Auth>(context).uEmail, false),
               buildTextField("Password", "********", true),
               SizedBox(
                 height: 35,
@@ -97,7 +121,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: Text("CANCEL",
                         style: TextStyle(
                             fontSize: 14,
@@ -107,12 +133,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {
-                      // ignore: deprecated_member_use
-                      Scaffold.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Profile Edited Successfully!'),
-                        ),
-                      );
+                      Provider.of<Auth>(context, listen: false).updateUserData(uData['userName']);
+
+                      //ignore: deprecated_member_use
+                      // Scaffold.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Text('Profile Edited Successfully!'),
+                      //   ),
+                      // );
                     },
                     color: KMainColor,
                     padding: EdgeInsets.symmetric(horizontal: 50),
@@ -158,6 +186,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             labelText: labelText,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
+
             hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

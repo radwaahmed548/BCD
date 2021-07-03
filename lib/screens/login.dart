@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gp/components/tools.dart';
 import 'package:gp/components/background.dart';
+import 'package:gp/models/httpException.dart';
 import 'package:provider/provider.dart';
 import '../models/login_auth.dart';
 
@@ -22,6 +23,24 @@ class _LoginScreenState extends State<LoginScreen> {
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   Future<void> submit() async {
     if (!_formkey.currentState.validate()) {
       return;
@@ -30,11 +49,30 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isLoading = true;
     });
-    {
+    try {
       await Provider.of<Auth>(context, listen: false).login(
         _authData['email'],
         _authData['password'],
       );
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch(e)
+    {
+      const e =
+          'Could not authenticate you. Please try again later.';
+      _showErrorDialog(e);
     }
     setState(() {
       _isLoading = false;
@@ -158,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 45, vertical: 10),
+              margin: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
               child: GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/register')},
                 child: Text(

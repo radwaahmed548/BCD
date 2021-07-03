@@ -12,6 +12,7 @@ class Auth with ChangeNotifier{
   String _userID;
   Timer _authTimer;
   String _userName;
+  String _uEmail;
 
   bool get isAuth {
     return token != null;
@@ -20,6 +21,11 @@ class Auth with ChangeNotifier{
   String get userName {
     return _userName;
   }
+
+  String get uEmail {
+    return _uEmail;
+  }
+
 
   String get token {
     if (_expiretime != null &&
@@ -179,8 +185,22 @@ class Auth with ChangeNotifier{
     "idToken": _token,
     }
     );
+    notifyListeners();
     print(response.body);
-    _userName = json.decode(response.body)['users']['displayName'];
+    _userName = json.decode(response.body)['users'][0]['displayName'];
+    _uEmail = json.decode(response.body)['users'][0]['email'];
     print(_userName);
   }
+
+  Future<void> updateUserData(String newUserName) async {
+    final url =
+    Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCKqvgNHItjpsHYuj-iuyKKdsid5XQ0iCw');
+    final response = await http.post(url, body: {
+      'idToken': _token,
+      'displayName': newUserName,
+    });
+    notifyListeners();
+  }
+
 }
+

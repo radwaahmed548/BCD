@@ -127,7 +127,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 onPressed: () {
                                   showDialog(
                                       context: context,
-                                      builder: (context) => AlertDialog(
+                                      builder: (context) => AlertDialog(actions:
+                                      [
+                                        // ignore: deprecated_member_use
+                                        FlatButton(
+                                          child: Text('OK'),
+                                        onPressed: () {
+                                        Navigator.of(context).pop();
+                                        },
+                                      )],
                                             title: Text("Calender Updated"),
                                             content:
                                                 Text("In 30 days We are Going to Inform You"),
@@ -145,17 +153,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         .addCalendar(calendar);
                                     _refreshData(context);
                                   }
+                                  Navigator.of(context).pushReplacementNamed('/home');
                                   displayNotification(
                                       'Your Next Examination Day is Tmw!',
                                       DateTime.now().add(Duration(seconds: 5)));
                                 },
                                 child: FittedBox(
-                                  child: Text('Save Calendar',
+                                  child: Text(
+                                      'Save',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                       )),
                                 ),
                               ),

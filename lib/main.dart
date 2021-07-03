@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gp/machine%20learning%20model/Result2.dart';
-import 'package:gp/machine%20learning%20model/data_model.dart';
 import 'package:gp/models/cal_normal.dart';
 import 'package:gp/models/cal_patient.dart';
 import 'package:gp/models/login_auth.dart';
@@ -44,9 +43,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: Auth(),
-        ),
-        ChangeNotifierProvider.value(
-          value: DataModel(),
         ),
         ChangeNotifierProvider.value(
           value:SupportTicket(),

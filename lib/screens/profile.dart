@@ -70,12 +70,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            'Nicolas Adams',
+            Provider.of<Auth>(context).userName,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            'nicolasadams@gmail.com',
+            Provider.of<Auth>(context).uEmail,
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),

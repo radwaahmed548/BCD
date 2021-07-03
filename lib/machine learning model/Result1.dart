@@ -118,11 +118,11 @@ class ResultTrue extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(0),
                           child: Text(
-                            "Start your trip",
+                            "Start Your Trip",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontFamily: "Robotomono"
+                              fontSize: 18,
                             ),
                           ),
                         ),

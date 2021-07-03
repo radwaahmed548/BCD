@@ -32,7 +32,7 @@ class MainDrawer extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      'Menna mohamed',
+                      Provider.of<Auth>(context).userName,
                       style: TextStyle(
                           fontSize: 22,
                           color: Colors.white,

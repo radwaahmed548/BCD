@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:gp/components/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -107,11 +108,11 @@ class _MyAppState extends State<ExaminationScreen> {
                             itemCount: 1,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(5.0),
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Container(
                                           height: 150,
                                           width: size.width * 0.5,
@@ -122,34 +123,31 @@ class _MyAppState extends State<ExaminationScreen> {
                                           ),
                                       ),
                                     ),
-                                    SizedBox(width: 25),
-                                    RaisedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/calendar');
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(80.0)),
-                                      textColor: Colors.white,
+                                    SizedBox(width: 35),
+                                    // ignore: deprecated_member_use
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: size.height * 0.07,
+                                      width: size.width * 0.3,
+                                      decoration: new BoxDecoration(
+                                          borderRadius: BorderRadius.circular(80.0),
+                                          color: KMainColor),
                                       padding: const EdgeInsets.all(0),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 50.0,
-                                        width: 130,
-                                        decoration: new BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(80.0),
-                                            color: KMainColor),
-                                        padding: const EdgeInsets.all(0),
-                                        child: Text(
-                                          'Set calender',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            //fontFamily: 'A',
-                                          ),
+                                      // ignore: deprecated_member_use
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/calendar');
+                                        },
+                                        child: FittedBox(
+                                          child: Text(
+                                              'Set Calendar',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              )),
                                         ),
                                       ),
                                     ),
