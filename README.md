@@ -19,7 +19,7 @@ cancer a little bit easier .
 
 ## Overview
 - This application reminds the user to her self-examination every month.
-- It can predict whether the cancer is benign or malignant based on blood
+- It can predict whether the tumor is benign or malignant based on blood
 test results.
 - It can help the user to set-up a calendar to remind her with her doctor
 appointments, chemotherapy sessions and her medications.
