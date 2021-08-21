@@ -1,4 +1,4 @@
-# bREAST CANCER DETECTION
+# BREAST CANCER DETECTION
 This application is about offering women a way to remind them to self-examine
 each month and for cancer patients to detect the type of cancer and help them to
 plan their new journey against this disease. As an application, it requires
