@@ -1,4 +1,7 @@
 # BREAST CANCER DETECTION
+![Breast cancer detection](images/BCD.jpg)
+Photo by <a href="https://unsplash.com/@nci?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">National Cancer Institute</a> on <a href="https://unsplash.com/s/photos/breasr-cancer-detection?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 This application is about offering women a way to remind them to self-examine
 each month and for cancer patients to detect the type of cancer and help them to
 plan their new journey against this disease. As an application, it requires
